@@ -76,7 +76,15 @@ Finally, we can execute **SparkBWA** on the cluster. Again, we assume that Spark
 	--num-executors 32 SparkBWA-0.2.jar -m -r -p --index /Data/HumanBase/hg38 -n 32 
 	-w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589"
 	ERR000589_1.filt.fastq ERR000589_2.filt.fastq Output_ERR000589
+```
 
+```
+
+```
+/opt/spark/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 1 --verbose --num-executors 1 target/SparkBWA-0.2.jar -m -r -p --index /Data/HumanBase/hg38 -n 32  -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" ERR000589_1.filt.fastq ERR000589_2.filt.fastq Output_ERR000589
+```
+some times node manager will down once submit the jar file, have to check is yarn service healthy before submit jar.
+$HADOOP_HOME/sbin/start-yarn.sh make sure node manager is online!
 Options used:
 
 * **-m** - Sequence alignment algorithm.
