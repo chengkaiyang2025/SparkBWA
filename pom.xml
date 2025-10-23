@@ -7,12 +7,10 @@
     <groupId>com.github.sparkbwa</groupId>
     <artifactId>SparkBWA</artifactId>
     <version>0.2</version>
-
     <repositories>
         <repository>
-            <id>128</id>
-            <name>mvn.128.no</name>
-            <url>https://mvn.128.no/maven2</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
@@ -23,10 +21,12 @@
             <artifactId>spark-core_2.11</artifactId>
             <version>[2.3.3,)</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.adamheinrich/native-utils -->
+        <!-- https://mvnrepository.com/artifact/com.github.adamheinrich/native-utils -->
         <dependency>
-            <groupId>cz.adamh.utils</groupId>
+            <groupId>com.github.adamheinrich</groupId>
             <artifactId>native-utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>e6a3948</version>
         </dependency>
     </dependencies>
 
