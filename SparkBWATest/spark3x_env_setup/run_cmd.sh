@@ -1,5 +1,4 @@
-docker buildx build --platform=linux/amd64 \
-  -t jdk11-hadoop3.3-spark3.3 .
+docker buildx build --platform=linux/amd64 -t jdk8-hadoop3.3-spark3.3 .
   
 docker run -it --name sparkbwa_3 \
   -p 9870:9870 \     # ✅ Hadoop NameNode UI 新端口
