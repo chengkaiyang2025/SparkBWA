@@ -177,3 +177,15 @@ You need to set correctly your *JAVA_HOME* environment variable or you can set i
 [3]: http://www.1000genomes.org/
 [4]: http://spark.apache.org/
 [5]: http://dx.doi.org/10.1371/journal.pone.0155461
+
+
+000
+
+
+进入 容器
+cd ~/Documents/Github/SparkBWA/SparkBWATest/spark3x_env_setup_compose   # 假设 compose 文件在这
+docker compose exec spark-client bash
+
+
+
+/opt/spark/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 1 --verbose --num-executors 1 SparkBWA-jdk8-spark3.jar -m -r -p --index /work/hg38 -n 32  -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" ERR000589_1.filt.fastq ERR000589_2.filt.fastq Output_ERR000589_1
