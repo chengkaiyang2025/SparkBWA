@@ -14,7 +14,8 @@ container for submitting Spark jobs to YARN.
 1) Build the image (first time):
 with cache:
 ```bash
-docker compose build --no-cache ```
+docker compose build --no-cache 
+```
 ```bash
 docker compose build --progress=plain --build-arg BUILDKIT_STEP_LOG_MAX_SIZE=10485760 --build-arg BUILDKIT_STEP_LOG_MAX_SPEED=10485760 --network=host
 ```
