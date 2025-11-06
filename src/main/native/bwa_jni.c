@@ -138,14 +138,11 @@ JNIEXPORT jint JNICALL Java_com_github_sparkbwa_BwaJni_bwa_1jni (JNIEnv *env, jo
 	fprintf(stderr, "[%s] Return code from BWA %d.\n", __func__,ret);
 	
 	//if((strcmp(algorithm,"mem")!=0)&&(strcmp(algorithm,"sampe")!=0)){
-	if(redirect == 1){
-		fflush(stdout);
-		fclose(stdout);
-		
-		FILE *fp2 = fdopen(temp_stdout, "w");
-		
-		stdout = fp2;
-	}
+if (redirect == 1) {
+	// Modified here
+    fflush(stdout);
+    if (temp_stdout != -1) close(temp_stdout);
+}
 	
 	/*
 	for (i=0; i<stringCount; i++) {
