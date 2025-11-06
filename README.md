@@ -190,6 +190,6 @@ docker  exec -it nm bash
 
 bwa mem -t 8 -R '@RG\tID:sample1\tLB:lib1\tPL:illumina\tPU:unit1\tSM:sample1' hg38/chr22.fa ERR000589_1.filt.fastq ERR000589_2.filt.fastq > sample1.sam
 
- docker cp SparkBWA-jdk8-spark3-v2.jar spark-client:/work/
+ docker cp SparkBWA-jdk8-spark3-v3.jar spark-client:/work/
 
-/opt/spark/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 1 --verbose --num-executors 1 SparkBWA-jdk8-spark3-v2.jar -m -r -p --index /work/hg38/chr22.fa -n 32  -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" ERR000589_1.filt.fastq ERR000589_2.filt.fastq Output_ERR000589_2219
+/opt/spark/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 1 --verbose --num-executors 1 SparkBWA-jdk8-spark3-v3.jar -m -r -p --index /work/hg38/chr22.fa -n 32  -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" ERR000589_1.filt.fastq ERR000589_2.filt.fastq Output_ERR000589_2258
