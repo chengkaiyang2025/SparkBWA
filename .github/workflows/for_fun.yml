@@ -1,0 +1,34 @@
+name: Streaming Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'spark3'
+
+defaults:
+  run:
+    working-directory: SparkBWATest
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          lfs: true
+
+      - name: Print file list
+        run: |
+          echo "📂 Current directory: $(pwd)"
+          echo "==================== FILE LIST ===================="
+          ls -al
+          echo "==================================================="
