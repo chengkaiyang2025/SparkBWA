@@ -6,7 +6,7 @@
 
   <groupId>com.github.sparkbwa</groupId>
   <artifactId>SparkBWA</artifactId>
-  <version>jdk17-spark4-v1</version>
+  <version>jdk17-spark4-v2</version>
   <name>SparkBWA</name>
 
   <!-- 用到 JitPack 取较新的 native-utils 实现 -->
