@@ -1,44 +1,34 @@
 <configuration>
-  <!-- RM 主机 -->
   <property>
     <name>yarn.resourcemanager.hostname</name>
     <value>rm</value>
   </property>
+  <!-- NodeManager 对外汇报的“可分配内存” -->
+<property>
+  <name>yarn.nodemanager.resource.memory-mb</name>
+  <value>32768</value> <!-- 32 GB -->
+</property>
 
-  <!-- 每个 NodeManager 汇报的可分配内存总量：3 GB -->
-  <property>
-    <name>yarn.nodemanager.resource.memory-mb</name>
-    <value>3072</value>
-  </property>
+<property>
+  <name>yarn.nodemanager.resource.cpu-vcores</name>
+  <value>8</value>
+</property>
 
-  <!-- vcores 不变 -->
-  <property>
-    <name>yarn.nodemanager.resource.cpu-vcores</name>
-    <value>8</value>
-  </property>
-
-  <!-- 调度器容器内存上下限（最大值务必 ≤ NM 总量）-->
-  <property>
-    <name>yarn.scheduler.maximum-allocation-mb</name>
-    <value>3072</value>
-  </property>
-  <property>
-    <name>yarn.scheduler.minimum-allocation-mb</name>
-    <value>256</value> <!-- 或 512，按需 -->
-  </property>
-  <!-- 可选：设置分配步长，避免 256/512 的向上取整误差 -->
-  <property>
-    <name>yarn.scheduler.increment-allocation-mb</name>
-    <value>256</value>
-  </property>
-
-  <!-- 其它保持不变 -->
+<!-- 调度器的容器内存上下限 -->
+<property>
+  <name>yarn.scheduler.minimum-allocation-mb</name>
+  <value>512</value>
+</property>
+<property>
+  <name>yarn.scheduler.maximum-allocation-mb</name>
+  <value>32768</value> <!-- 不小于上面 -->
+</property>
   <property>
     <name>yarn.nodemanager.aux-services</name>
     <value>mapreduce_shuffle</value>
   </property>
   <property>
-    <name>yarn.resourcemanager.scheduler.class</name>
-    <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fifo.FifoScheduler</value>
-  </property>
+  <name>yarn.resourcemanager.scheduler.class</name>
+  <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fifo.FifoScheduler</value>
+</property>
 </configuration>
