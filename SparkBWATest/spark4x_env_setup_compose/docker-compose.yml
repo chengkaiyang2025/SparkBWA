@@ -1,0 +1,86 @@
+services:
+  namenode:
+    build: .
+    image: hadoop3.3-spark4-dualjdk:latest
+    container_name: nn
+    hostname: nn
+    ports:
+      - "9870:9870"    # NN WebUI
+      - "9000:9000"    # HDFS RPC
+    volumes:
+      - nn-data:/data/hdfs/namenode
+      - ./hadoop-conf:/opt/hadoop/etc/hadoop:ro
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+      - HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
+    command: >
+      bash -lc '
+        if [ ! -f /data/hdfs/namenode/current/VERSION ]; then
+          hdfs namenode -format -force;
+        fi;
+        exec hdfs namenode
+      '
+
+  datanode:
+    image: hadoop3.3-spark4-dualjdk:latest
+    container_name: dn
+    hostname: dn
+    depends_on: [namenode]
+    ports:
+      - "9864:9864"    # DN WebUI
+    volumes:
+      - dn-data:/data/hdfs/datanode
+      - ./hadoop-conf:/opt/hadoop/etc/hadoop:ro
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+      - HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
+    command: bash -lc 'exec hdfs datanode'
+
+  resourcemanager:
+    image: hadoop3.3-spark4-dualjdk:latest
+    container_name: rm
+    hostname: rm
+    depends_on: [namenode]
+    ports:
+      - "8088:8088"    # YARN RM WebUI
+    volumes:
+      - ./hadoop-conf:/opt/hadoop/etc/hadoop:ro
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+      - HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
+    command: bash -lc 'exec yarn resourcemanager'
+
+  nodemanager:
+    image: hadoop3.3-spark4-dualjdk:latest
+    container_name: nm
+    hostname: nm
+    depends_on: [resourcemanager]
+    mem_limit: "36g"   # 给容器 36 GB（给宿主机/其他容器留 ~4 GB）
+    cpus: "8"          # 按你的 CPU 决定
+    ports:
+      - "8042:8042"    # NM WebUI
+    volumes:
+      - ./hadoop-conf:/opt/hadoop/etc/hadoop:ro
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+      - HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
+    command: bash -lc 'exec yarn nodemanager'
+
+  spark-client:
+    image: hadoop3.3-spark4-dualjdk:latest
+    container_name: spark-client
+    hostname: spark-client
+    depends_on: [resourcemanager, nodemanager, namenode, datanode]
+    volumes:
+      - ./hadoop-conf:/opt/hadoop/etc/hadoop:ro
+      - ./work:/work
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+      - HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
+      - SPARK_HOME=/opt/spark
+    working_dir: /work
+    entrypoint: ["/bin/bash", "-lc", "tail -f /dev/null"]
+
+volumes:
+  nn-data:
+  dn-data:
