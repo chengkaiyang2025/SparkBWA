@@ -1,0 +1,654 @@
+        at scala.collection.Iterator$$anon$11.nextCur(Iterator.scala:486)
+        at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:492)
+        at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+        at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+        at scala.collection.convert.Wrappers$IteratorWrapper.hasNext(Wrappers.scala:32)
+        at com.github.sparkbwa.BwaPairedAlignment.call(BwaPairedAlignment.java:94)
+        at com.github.sparkbwa.BwaPairedAlignment.call(BwaPairedAlignment.java:33)
+        at org.apache.spark.api.java.JavaRDDLike.$anonfun$mapPartitionsWithIndex$1(JavaRDDLike.scala:102)
+        at org.apache.spark.api.java.JavaRDDLike.$anonfun$mapPartitionsWithIndex$1$adapted(JavaRDDLike.scala:102)
+        at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsWithIndex$2(RDD.scala:907)
+        at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsWithIndex$2$adapted(RDD.scala:907)
+        at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+        at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:365)
+        at org.apache.spark.rdd.RDD.iterator(RDD.scala:329)
+        at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:90)
+        at org.apache.spark.scheduler.Task.run(Task.scala:136)
+        at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$3(Executor.scala:548)
+        at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:1504)
+        at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:551)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+        at java.lang.Thread.run(Thread.java:750)
+
+)
+25/11/06 06:33:24 INFO TaskSetManager: task 2.0 in stage 5.0 (TID 71) failed, but the task will not be re-executed (either because the task failed with a shuffle data fetch failure, so the previous stage needs to be re-run, or because a different copy of the task has already succeeded).
+25/11/06 06:33:24 INFO YarnScheduler: Removed TaskSet 5.0, whose tasks have all completed, from pool 
+25/11/06 06:33:24 INFO SparkUI: Stopped Spark web UI at http://spark-client:4040
+25/11/06 06:33:24 INFO YarnClientSchedulerBackend: Interrupting monitor thread
+25/11/06 06:33:24 INFO YarnClientSchedulerBackend: Shutting down all executors
+25/11/06 06:33:24 INFO YarnSchedulerBackend$YarnDriverEndpoint: Asking each executor to shut down
+25/11/06 06:33:24 INFO YarnClientSchedulerBackend: YARN client scheduler backend Stopped
+25/11/06 06:33:24 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+25/11/06 06:33:24 INFO MemoryStore: MemoryStore cleared
+25/11/06 06:33:24 INFO BlockManager: BlockManager stopped
+25/11/06 06:33:24 INFO BlockManagerMaster: BlockManagerMaster stopped
+25/11/06 06:33:24 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+25/11/06 06:33:24 INFO SparkContext: Successfully stopped SparkContext
+25/11/06 06:33:24 INFO ShutdownHookManager: Shutdown hook called
+25/11/06 06:33:24 INFO ShutdownHookManager: Deleting directory /tmp/spark-ef3ef1e9-03a7-45f5-9461-9decd2d4a6f0
+25/11/06 06:33:24 INFO ShutdownHookManager: Deleting directory /tmp/spark-29c053bd-32f8-4fd5-9894-569b99429802
+root@spark-client:/work# git fetch
+bash: git: command not found
+root@spark-client:/work# ls
+chr22.fa.gz  ERR000589_1.filt.fastq  ERR000589_2.filt.fastq  hg38  sample1.sam  SparkBWA-jdk8-spark3.jar  SparkBWA-jdk8-spark3-v2.jar  SparkBWA-jdk8-spark3-v3.jar  tmp
+root@spark-client:/work# /opt/spark/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 1 --verbose --num-executors 1 SparkBWA-jdk8-spark3-v3.jar -m -r -p --index /work/hg38/chr22.fa -n 32  -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" ERR000589_1.filt.fastq ERR000589_2.filt.fastq Output_ERR000589_2258
+Using properties file: /opt/spark/conf/spark-defaults.conf
+Adding default property: -e=spark.eventLog.enabled true
+Adding default property: spark.eventLog.dir=file:///tmp/spark-events
+Adding default property: spark.master=local[*]
+Warning: Ignoring non-Spark config property: -e
+Parsed arguments:
+  master                  yarn
+  deployMode              client
+  executorMemory          null
+  executorCores           1
+  totalExecutorCores      null
+  propertiesFile          /opt/spark/conf/spark-defaults.conf
+  driverMemory            null
+  driverCores             null
+  driverExtraClassPath    null
+  driverExtraLibraryPath  null
+  driverExtraJavaOptions  null
+  supervise               false
+  queue                   null
+  numExecutors            1
+  files                   null
+  pyFiles                 null
+  archives                null
+  mainClass               com.github.sparkbwa.SparkBWA
+  primaryResource         file:/work/SparkBWA-jdk8-spark3-v3.jar
+  name                    com.github.sparkbwa.SparkBWA
+  childArgs               [-m -r -p --index /work/hg38/chr22.fa -n 32 -w -R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589 ERR000589_1.filt.fastq ERR000589_2.filt.fastq Output_ERR000589_2258]
+  jars                    null
+  packages                null
+  packagesExclusions      null
+  repositories            null
+  verbose                 true
+
+Spark properties used, including those specified through
+ --conf and those from the properties file /opt/spark/conf/spark-defaults.conf:
+  (spark.eventLog.dir,file:///tmp/spark-events)
+  (spark.master,local[*])
+
+    
+Main class:
+com.github.sparkbwa.SparkBWA
+Arguments:
+-m
+-r
+-p
+--index
+/work/hg38/chr22.fa
+-n
+32
+-w
+-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589
+ERR000589_1.filt.fastq
+ERR000589_2.filt.fastq
+Output_ERR000589_2258
+Spark config:
+(spark.app.name,com.github.sparkbwa.SparkBWA)
+(spark.app.submitTime,1762412318292)
+(spark.eventLog.dir,file:///tmp/spark-events)
+(spark.executor.cores,1)
+(spark.executor.instances,1)
+(spark.jars,file:/work/SparkBWA-jdk8-spark3-v3.jar)
+(spark.master,yarn)
+(spark.submit.deployMode,client)
+(spark.submit.pyFiles,)
+Classpath elements:
+file:/work/SparkBWA-jdk8-spark3-v3.jar
+
+
+25/11/06 06:58:38 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: -m
+25/11/06 06:58:38 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: -r
+25/11/06 06:58:38 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: -p
+25/11/06 06:58:38 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: --index
+25/11/06 06:58:38 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: /work/hg38/chr22.fa
+25/11/06 06:58:38 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: -n
+25/11/06 06:58:38 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: 32
+25/11/06 06:58:38 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: -w
+25/11/06 06:58:38 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: -R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589
+25/11/06 06:58:38 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: ERR000589_1.filt.fastq
+25/11/06 06:58:38 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: ERR000589_2.filt.fastq
+25/11/06 06:58:38 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: Output_ERR000589_2258
+25/11/06 06:58:38 INFO SparkContext: Running Spark version 3.3.2
+25/11/06 06:58:38 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/11/06 06:58:38 INFO ResourceUtils: ==============================================================
+25/11/06 06:58:38 INFO ResourceUtils: No custom resources configured for spark.driver.
+25/11/06 06:58:38 INFO ResourceUtils: ==============================================================
+25/11/06 06:58:38 INFO SparkContext: Submitted application: SparkBWA_ERR000589_1.filt.fastq-32-NoSort
+25/11/06 06:58:38 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+25/11/06 06:58:38 INFO ResourceProfile: Limiting resource is cpus at 1 tasks per executor
+25/11/06 06:58:38 INFO ResourceProfileManager: Added ResourceProfile id: 0
+25/11/06 06:58:38 INFO SecurityManager: Changing view acls to: root
+25/11/06 06:58:38 INFO SecurityManager: Changing modify acls to: root
+25/11/06 06:58:38 INFO SecurityManager: Changing view acls groups to: 
+25/11/06 06:58:38 INFO SecurityManager: Changing modify acls groups to: 
+25/11/06 06:58:38 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
+25/11/06 06:58:38 INFO Utils: Successfully started service 'sparkDriver' on port 41659.
+25/11/06 06:58:38 INFO SparkEnv: Registering MapOutputTracker
+25/11/06 06:58:38 INFO SparkEnv: Registering BlockManagerMaster
+25/11/06 06:58:38 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+25/11/06 06:58:38 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+25/11/06 06:58:38 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+25/11/06 06:58:38 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-32cc9bc4-8fec-4a5b-93ce-cdfd787aa498
+25/11/06 06:58:39 INFO MemoryStore: MemoryStore started with capacity 366.3 MiB
+25/11/06 06:58:39 INFO SparkEnv: Registering OutputCommitCoordinator
+25/11/06 06:58:39 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+25/11/06 06:58:39 INFO SparkContext: Added JAR file:/work/SparkBWA-jdk8-spark3-v3.jar at spark://spark-client:41659/jars/SparkBWA-jdk8-spark3-v3.jar with timestamp 1762412318363
+25/11/06 06:58:39 INFO DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at rm/172.20.0.3:8032
+25/11/06 06:58:39 INFO Configuration: resource-types.xml not found
+25/11/06 06:58:39 INFO ResourceUtils: Unable to find 'resource-types.xml'.
+25/11/06 06:58:39 INFO Client: Verifying our application has not requested more than the maximum memory capability of the cluster (32768 MB per container)
+25/11/06 06:58:39 INFO Client: Will allocate AM container, with 896 MB memory including 384 MB overhead
+25/11/06 06:58:39 INFO Client: Setting up container launch context for our AM
+25/11/06 06:58:39 INFO Client: Setting up the launch environment for our AM container
+25/11/06 06:58:39 INFO Client: Preparing resources for our AM container
+25/11/06 06:58:40 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+25/11/06 06:58:41 INFO Client: Uploading resource file:/tmp/spark-df566780-c38d-4e01-8875-80e16a99d010/__spark_libs__4604980655480482761.zip -> hdfs://nn:9000/user/root/.sparkStaging/application_1762401512426_0006/__spark_libs__4604980655480482761.zip
+25/11/06 06:58:42 INFO Client: Uploading resource file:/tmp/spark-df566780-c38d-4e01-8875-80e16a99d010/__spark_conf__890147249702438033.zip -> hdfs://nn:9000/user/root/.sparkStaging/application_1762401512426_0006/__spark_conf__.zip
+25/11/06 06:58:42 INFO SecurityManager: Changing view acls to: root
+25/11/06 06:58:42 INFO SecurityManager: Changing modify acls to: root
+25/11/06 06:58:42 INFO SecurityManager: Changing view acls groups to: 
+25/11/06 06:58:42 INFO SecurityManager: Changing modify acls groups to: 
+25/11/06 06:58:42 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
+25/11/06 06:58:42 INFO Client: Submitting application application_1762401512426_0006 to ResourceManager
+25/11/06 06:58:42 INFO YarnClientImpl: Submitted application application_1762401512426_0006
+25/11/06 06:58:43 INFO Client: Application report for application_1762401512426_0006 (state: ACCEPTED)
+25/11/06 06:58:43 INFO Client: 
+         client token: N/A
+         diagnostics: AM container is launched, waiting for AM container to Register with RM
+         ApplicationMaster host: N/A
+         ApplicationMaster RPC port: -1
+         queue: default
+         start time: 1762412322091
+         final status: UNDEFINED
+         tracking URL: http://rm:8088/proxy/application_1762401512426_0006/
+         user: root
+25/11/06 06:58:44 INFO Client: Application report for application_1762401512426_0006 (state: ACCEPTED)
+25/11/06 06:58:45 INFO Client: Application report for application_1762401512426_0006 (state: ACCEPTED)
+25/11/06 06:58:46 INFO Client: Application report for application_1762401512426_0006 (state: ACCEPTED)
+25/11/06 06:58:46 INFO YarnClientSchedulerBackend: Add WebUI Filter. org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter, Map(PROXY_HOSTS -> rm, PROXY_URI_BASES -> http://rm:8088/proxy/application_1762401512426_0006), /proxy/application_1762401512426_0006
+25/11/06 06:58:46 INFO YarnSchedulerBackend$YarnSchedulerEndpoint: ApplicationMaster registered as NettyRpcEndpointRef(spark-client://YarnAM)
+25/11/06 06:58:47 INFO Client: Application report for application_1762401512426_0006 (state: RUNNING)
+25/11/06 06:58:47 INFO Client: 
+         client token: N/A
+         diagnostics: N/A
+         ApplicationMaster host: 172.20.0.5
+         ApplicationMaster RPC port: -1
+         queue: default
+         start time: 1762412322091
+         final status: UNDEFINED
+         tracking URL: http://rm:8088/proxy/application_1762401512426_0006/
+         user: root
+25/11/06 06:58:47 INFO YarnClientSchedulerBackend: Application application_1762401512426_0006 has started running.
+25/11/06 06:58:47 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 43523.
+25/11/06 06:58:47 INFO NettyBlockTransferService: Server created on spark-client:43523
+25/11/06 06:58:47 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+25/11/06 06:58:47 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, spark-client, 43523, None)
+25/11/06 06:58:47 INFO BlockManagerMasterEndpoint: Registering block manager spark-client:43523 with 366.3 MiB RAM, BlockManagerId(driver, spark-client, 43523, None)
+25/11/06 06:58:47 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, spark-client, 43523, None)
+25/11/06 06:58:47 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, spark-client, 43523, None)
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /jobs: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /jobs/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /jobs/job: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /jobs/job/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /stages: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /stages/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /stages/stage: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /stages/stage/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /stages/pool: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /stages/pool/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /storage: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /storage/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /storage/rdd: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /storage/rdd/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /environment: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /environment/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /executors: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /executors/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /executors/threadDump: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /executors/threadDump/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /static: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /api: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /jobs/job/kill: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /stages/stage/kill: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:47 INFO ServerInfo: Adding filter to /metrics/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+25/11/06 06:58:51 INFO YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.20.0.5:54180) with ID 1,  ResourceProfileId 0
+25/11/06 06:58:51 INFO YarnClientSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.8
+25/11/06 06:58:51 INFO BlockManagerMasterEndpoint: Registering block manager nm:38085 with 366.3 MiB RAM, BlockManagerId(1, nm, 38085, None)
+25/11/06 06:58:51 INFO BwaInterpreter: [com.github.sparkbwa.BwaInterpreter] :: Starting BWA
+25/11/06 06:58:51 INFO BwaInterpreter: [com.github.sparkbwa.BwaInterpreter] ::Not sorting in HDFS. Timing: 19224257671691
+25/11/06 06:58:51 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 361.4 KiB, free 365.9 MiB)
+25/11/06 06:58:51 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 32.8 KiB, free 365.9 MiB)
+25/11/06 06:58:51 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on spark-client:43523 (size: 32.8 KiB, free: 366.3 MiB)
+25/11/06 06:58:51 INFO SparkContext: Created broadcast 0 from textFile at BwaInterpreter.java:149
+25/11/06 06:58:51 INFO FileInputFormat: Total input files to process : 1
+25/11/06 06:58:52 INFO SparkContext: Starting job: zipWithIndex at BwaInterpreter.java:152
+25/11/06 06:58:52 INFO DAGScheduler: Got job 0 (zipWithIndex at BwaInterpreter.java:152) with 13 output partitions
+25/11/06 06:58:52 INFO DAGScheduler: Final stage: ResultStage 0 (zipWithIndex at BwaInterpreter.java:152)
+25/11/06 06:58:52 INFO DAGScheduler: Parents of final stage: List()
+25/11/06 06:58:52 INFO DAGScheduler: Missing parents: List()
+25/11/06 06:58:52 INFO DAGScheduler: Submitting ResultStage 0 (ERR000589_1.filt.fastq MapPartitionsRDD[1] at textFile at BwaInterpreter.java:149), which has no missing parents
+25/11/06 06:58:52 INFO MemoryStore: Block broadcast_1 stored as values in memory (estimated size 4.9 KiB, free 365.9 MiB)
+25/11/06 06:58:52 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 2.8 KiB, free 365.9 MiB)
+25/11/06 06:58:52 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on spark-client:43523 (size: 2.8 KiB, free: 366.3 MiB)
+25/11/06 06:58:52 INFO SparkContext: Created broadcast 1 from broadcast at DAGScheduler.scala:1513
+25/11/06 06:58:52 INFO DAGScheduler: Submitting 13 missing tasks from ResultStage 0 (ERR000589_1.filt.fastq MapPartitionsRDD[1] at textFile at BwaInterpreter.java:149) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
+25/11/06 06:58:52 INFO YarnScheduler: Adding task set 0.0 with 13 tasks resource profile 0
+25/11/06 06:58:52 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0) (nm, executor 1, partition 0, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:58:52 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on nm:38085 (size: 2.8 KiB, free: 366.3 MiB)
+25/11/06 06:58:52 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on nm:38085 (size: 32.8 KiB, free: 366.3 MiB)
+25/11/06 06:58:54 INFO TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1) (nm, executor 1, partition 1, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:58:54 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 1937 ms on nm (executor 1) (1/13)
+25/11/06 06:58:54 INFO TaskSetManager: Starting task 2.0 in stage 0.0 (TID 2) (nm, executor 1, partition 2, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:58:54 INFO TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 737 ms on nm (executor 1) (2/13)
+25/11/06 06:58:55 INFO TaskSetManager: Starting task 3.0 in stage 0.0 (TID 3) (nm, executor 1, partition 3, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:58:55 INFO TaskSetManager: Finished task 2.0 in stage 0.0 (TID 2) in 669 ms on nm (executor 1) (3/13)
+25/11/06 06:58:56 INFO TaskSetManager: Starting task 4.0 in stage 0.0 (TID 4) (nm, executor 1, partition 4, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:58:56 INFO TaskSetManager: Finished task 3.0 in stage 0.0 (TID 3) in 648 ms on nm (executor 1) (4/13)
+25/11/06 06:58:56 INFO TaskSetManager: Starting task 5.0 in stage 0.0 (TID 5) (nm, executor 1, partition 5, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:58:56 INFO TaskSetManager: Finished task 4.0 in stage 0.0 (TID 4) in 665 ms on nm (executor 1) (5/13)
+25/11/06 06:58:57 INFO TaskSetManager: Starting task 6.0 in stage 0.0 (TID 6) (nm, executor 1, partition 6, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:58:57 INFO TaskSetManager: Finished task 5.0 in stage 0.0 (TID 5) in 661 ms on nm (executor 1) (6/13)
+25/11/06 06:58:58 INFO TaskSetManager: Starting task 7.0 in stage 0.0 (TID 7) (nm, executor 1, partition 7, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:58:58 INFO TaskSetManager: Finished task 6.0 in stage 0.0 (TID 6) in 652 ms on nm (executor 1) (7/13)
+25/11/06 06:58:58 INFO TaskSetManager: Starting task 8.0 in stage 0.0 (TID 8) (nm, executor 1, partition 8, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:58:58 INFO TaskSetManager: Finished task 7.0 in stage 0.0 (TID 7) in 647 ms on nm (executor 1) (8/13)
+25/11/06 06:58:59 INFO TaskSetManager: Starting task 9.0 in stage 0.0 (TID 9) (nm, executor 1, partition 9, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:58:59 INFO TaskSetManager: Finished task 8.0 in stage 0.0 (TID 8) in 651 ms on nm (executor 1) (9/13)
+25/11/06 06:59:00 INFO TaskSetManager: Starting task 10.0 in stage 0.0 (TID 10) (nm, executor 1, partition 10, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:00 INFO TaskSetManager: Finished task 9.0 in stage 0.0 (TID 9) in 652 ms on nm (executor 1) (10/13)
+25/11/06 06:59:00 INFO TaskSetManager: Starting task 11.0 in stage 0.0 (TID 11) (nm, executor 1, partition 11, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:00 INFO TaskSetManager: Finished task 10.0 in stage 0.0 (TID 10) in 648 ms on nm (executor 1) (11/13)
+25/11/06 06:59:01 INFO TaskSetManager: Starting task 12.0 in stage 0.0 (TID 12) (nm, executor 1, partition 12, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:01 INFO TaskSetManager: Finished task 11.0 in stage 0.0 (TID 11) in 646 ms on nm (executor 1) (12/13)
+25/11/06 06:59:02 INFO TaskSetManager: Finished task 12.0 in stage 0.0 (TID 12) in 714 ms on nm (executor 1) (13/13)
+25/11/06 06:59:02 INFO YarnScheduler: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+25/11/06 06:59:02 INFO DAGScheduler: ResultStage 0 (zipWithIndex at BwaInterpreter.java:152) finished in 9.989 s
+25/11/06 06:59:02 INFO DAGScheduler: Job 0 is finished. Cancelling potential speculative or zombie tasks for this job
+25/11/06 06:59:02 INFO YarnScheduler: Killing all running tasks in stage 0: Stage finished
+25/11/06 06:59:02 INFO DAGScheduler: Job 0 finished: zipWithIndex at BwaInterpreter.java:152, took 10.051414 s
+25/11/06 06:59:02 INFO MemoryStore: Block broadcast_2 stored as values in memory (estimated size 361.4 KiB, free 365.6 MiB)
+25/11/06 06:59:02 INFO MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 32.8 KiB, free 365.5 MiB)
+25/11/06 06:59:02 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on spark-client:43523 (size: 32.8 KiB, free: 366.2 MiB)
+25/11/06 06:59:02 INFO SparkContext: Created broadcast 2 from textFile at BwaInterpreter.java:149
+25/11/06 06:59:02 INFO FileInputFormat: Total input files to process : 1
+25/11/06 06:59:02 INFO SparkContext: Starting job: zipWithIndex at BwaInterpreter.java:152
+25/11/06 06:59:02 INFO DAGScheduler: Got job 1 (zipWithIndex at BwaInterpreter.java:152) with 13 output partitions
+25/11/06 06:59:02 INFO DAGScheduler: Final stage: ResultStage 1 (zipWithIndex at BwaInterpreter.java:152)
+25/11/06 06:59:02 INFO DAGScheduler: Parents of final stage: List()
+25/11/06 06:59:02 INFO DAGScheduler: Missing parents: List()
+25/11/06 06:59:02 INFO DAGScheduler: Submitting ResultStage 1 (ERR000589_2.filt.fastq MapPartitionsRDD[8] at textFile at BwaInterpreter.java:149), which has no missing parents
+25/11/06 06:59:02 INFO MemoryStore: Block broadcast_3 stored as values in memory (estimated size 4.9 KiB, free 365.5 MiB)
+25/11/06 06:59:02 INFO MemoryStore: Block broadcast_3_piece0 stored as bytes in memory (estimated size 2.8 KiB, free 365.5 MiB)
+25/11/06 06:59:02 INFO BlockManagerInfo: Added broadcast_3_piece0 in memory on spark-client:43523 (size: 2.8 KiB, free: 366.2 MiB)
+25/11/06 06:59:02 INFO SparkContext: Created broadcast 3 from broadcast at DAGScheduler.scala:1513
+25/11/06 06:59:02 INFO DAGScheduler: Submitting 13 missing tasks from ResultStage 1 (ERR000589_2.filt.fastq MapPartitionsRDD[8] at textFile at BwaInterpreter.java:149) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
+25/11/06 06:59:02 INFO YarnScheduler: Adding task set 1.0 with 13 tasks resource profile 0
+25/11/06 06:59:02 INFO TaskSetManager: Starting task 0.0 in stage 1.0 (TID 13) (nm, executor 1, partition 0, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:02 INFO BlockManagerInfo: Added broadcast_3_piece0 in memory on nm:38085 (size: 2.8 KiB, free: 366.3 MiB)
+25/11/06 06:59:02 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on nm:38085 (size: 32.8 KiB, free: 366.2 MiB)
+25/11/06 06:59:02 INFO TaskSetManager: Starting task 1.0 in stage 1.0 (TID 14) (nm, executor 1, partition 1, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:02 INFO TaskSetManager: Finished task 0.0 in stage 1.0 (TID 13) in 728 ms on nm (executor 1) (1/13)
+25/11/06 06:59:03 INFO TaskSetManager: Starting task 2.0 in stage 1.0 (TID 15) (nm, executor 1, partition 2, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:03 INFO TaskSetManager: Finished task 1.0 in stage 1.0 (TID 14) in 648 ms on nm (executor 1) (2/13)
+25/11/06 06:59:04 INFO TaskSetManager: Starting task 3.0 in stage 1.0 (TID 16) (nm, executor 1, partition 3, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:04 INFO TaskSetManager: Finished task 2.0 in stage 1.0 (TID 15) in 644 ms on nm (executor 1) (3/13)
+25/11/06 06:59:04 INFO TaskSetManager: Starting task 4.0 in stage 1.0 (TID 17) (nm, executor 1, partition 4, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:04 INFO TaskSetManager: Finished task 3.0 in stage 1.0 (TID 16) in 640 ms on nm (executor 1) (4/13)
+25/11/06 06:59:05 INFO TaskSetManager: Starting task 5.0 in stage 1.0 (TID 18) (nm, executor 1, partition 5, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:05 INFO TaskSetManager: Finished task 4.0 in stage 1.0 (TID 17) in 658 ms on nm (executor 1) (5/13)
+25/11/06 06:59:06 INFO TaskSetManager: Starting task 6.0 in stage 1.0 (TID 19) (nm, executor 1, partition 6, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:06 INFO TaskSetManager: Finished task 5.0 in stage 1.0 (TID 18) in 641 ms on nm (executor 1) (6/13)
+25/11/06 06:59:06 INFO TaskSetManager: Starting task 7.0 in stage 1.0 (TID 20) (nm, executor 1, partition 7, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:06 INFO TaskSetManager: Finished task 6.0 in stage 1.0 (TID 19) in 654 ms on nm (executor 1) (7/13)
+25/11/06 06:59:07 INFO TaskSetManager: Starting task 8.0 in stage 1.0 (TID 21) (nm, executor 1, partition 8, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:07 INFO TaskSetManager: Finished task 7.0 in stage 1.0 (TID 20) in 645 ms on nm (executor 1) (8/13)
+25/11/06 06:59:08 INFO TaskSetManager: Starting task 9.0 in stage 1.0 (TID 22) (nm, executor 1, partition 9, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:08 INFO TaskSetManager: Finished task 8.0 in stage 1.0 (TID 21) in 647 ms on nm (executor 1) (9/13)
+25/11/06 06:59:08 INFO TaskSetManager: Starting task 10.0 in stage 1.0 (TID 23) (nm, executor 1, partition 10, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:08 INFO TaskSetManager: Finished task 9.0 in stage 1.0 (TID 22) in 649 ms on nm (executor 1) (10/13)
+25/11/06 06:59:09 INFO TaskSetManager: Starting task 11.0 in stage 1.0 (TID 24) (nm, executor 1, partition 11, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:09 INFO TaskSetManager: Finished task 10.0 in stage 1.0 (TID 23) in 650 ms on nm (executor 1) (11/13)
+25/11/06 06:59:10 INFO TaskSetManager: Starting task 12.0 in stage 1.0 (TID 25) (nm, executor 1, partition 12, RACK_LOCAL, 4527 bytes) taskResourceAssignments Map()
+25/11/06 06:59:10 INFO TaskSetManager: Finished task 11.0 in stage 1.0 (TID 24) in 651 ms on nm (executor 1) (12/13)
+25/11/06 06:59:10 INFO TaskSetManager: Finished task 12.0 in stage 1.0 (TID 25) in 646 ms on nm (executor 1) (13/13)
+25/11/06 06:59:10 INFO YarnScheduler: Removed TaskSet 1.0, whose tasks have all completed, from pool 
+25/11/06 06:59:10 INFO DAGScheduler: ResultStage 1 (zipWithIndex at BwaInterpreter.java:152) finished in 8.491 s
+25/11/06 06:59:10 INFO DAGScheduler: Job 1 is finished. Cancelling potential speculative or zombie tasks for this job
+25/11/06 06:59:10 INFO YarnScheduler: Killing all running tasks in stage 1: Stage finished
+25/11/06 06:59:10 INFO DAGScheduler: Job 1 finished: zipWithIndex at BwaInterpreter.java:152, took 8.500415 s
+25/11/06 06:59:10 INFO MapPartitionsRDD: Removing RDD 6 from persistence list
+25/11/06 06:59:10 INFO BlockManager: Removing RDD 6
+25/11/06 06:59:10 INFO MapPartitionsRDD: Removing RDD 13 from persistence list
+25/11/06 06:59:10 INFO BlockManager: Removing RDD 13
+25/11/06 06:59:10 INFO BwaInterpreter: [com.github.sparkbwa.BwaInterpreter] :: No sort with partitioning
+25/11/06 06:59:10 INFO BwaInterpreter: [com.github.sparkbwa.BwaInterpreter] :: Repartition with no sort
+25/11/06 06:59:10 INFO BwaInterpreter: [com.github.sparkbwa.BwaInterpreter] :: End of sorting. Timing: 19243541500846
+25/11/06 06:59:10 INFO BwaInterpreter: [com.github.sparkbwa.BwaInterpreter] :: Total time: 0.32139715258333335 minutes
+25/11/06 06:59:10 INFO BwaAlignmentBase: [com.github.sparkbwa.BwaPairedAlignment] :: application_1762401512426_0006 - SparkBWA_ERR000589_1.filt.fastq-32-NoSort
+25/11/06 06:59:10 INFO BlockManagerInfo: Removed broadcast_1_piece0 on spark-client:43523 in memory (size: 2.8 KiB, free: 366.2 MiB)
+25/11/06 06:59:10 INFO BlockManagerInfo: Removed broadcast_1_piece0 on nm:38085 in memory (size: 2.8 KiB, free: 366.2 MiB)
+25/11/06 06:59:10 INFO BlockManagerInfo: Removed broadcast_3_piece0 on spark-client:43523 in memory (size: 2.8 KiB, free: 366.2 MiB)
+25/11/06 06:59:10 INFO BlockManagerInfo: Removed broadcast_3_piece0 on nm:38085 in memory (size: 2.8 KiB, free: 366.2 MiB)
+25/11/06 06:59:10 INFO SparkContext: Starting job: collect at BwaInterpreter.java:305
+25/11/06 06:59:10 INFO DAGScheduler: Registering RDD 3 (mapToPair at BwaInterpreter.java:152) as input to shuffle 2
+25/11/06 06:59:10 INFO DAGScheduler: Registering RDD 10 (mapToPair at BwaInterpreter.java:152) as input to shuffle 1
+25/11/06 06:59:10 INFO DAGScheduler: Registering RDD 17 (repartition at BwaInterpreter.java:281) as input to shuffle 0
+25/11/06 06:59:10 INFO DAGScheduler: Got job 2 (collect at BwaInterpreter.java:305) with 32 output partitions
+25/11/06 06:59:10 INFO DAGScheduler: Final stage: ResultStage 5 (collect at BwaInterpreter.java:305)
+25/11/06 06:59:10 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 4)
+25/11/06 06:59:10 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 4)
+25/11/06 06:59:10 INFO DAGScheduler: Submitting ShuffleMapStage 2 (MapPartitionsRDD[3] at mapToPair at BwaInterpreter.java:152), which has no missing parents
+25/11/06 06:59:10 INFO MemoryStore: Block broadcast_4 stored as values in memory (estimated size 7.4 KiB, free 365.5 MiB)
+25/11/06 06:59:10 INFO MemoryStore: Block broadcast_4_piece0 stored as bytes in memory (estimated size 4.0 KiB, free 365.5 MiB)
+25/11/06 06:59:10 INFO BlockManagerInfo: Added broadcast_4_piece0 in memory on spark-client:43523 (size: 4.0 KiB, free: 366.2 MiB)
+25/11/06 06:59:10 INFO SparkContext: Created broadcast 4 from broadcast at DAGScheduler.scala:1513
+25/11/06 06:59:10 INFO DAGScheduler: Submitting 14 missing tasks from ShuffleMapStage 2 (MapPartitionsRDD[3] at mapToPair at BwaInterpreter.java:152) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13))
+25/11/06 06:59:10 INFO YarnScheduler: Adding task set 2.0 with 14 tasks resource profile 0
+25/11/06 06:59:10 INFO DAGScheduler: Submitting ShuffleMapStage 3 (MapPartitionsRDD[10] at mapToPair at BwaInterpreter.java:152), which has no missing parents
+25/11/06 06:59:10 INFO TaskSetManager: Starting task 0.0 in stage 2.0 (TID 26) (nm, executor 1, partition 0, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:10 INFO MemoryStore: Block broadcast_5 stored as values in memory (estimated size 7.4 KiB, free 365.5 MiB)
+25/11/06 06:59:10 INFO MemoryStore: Block broadcast_5_piece0 stored as bytes in memory (estimated size 4.0 KiB, free 365.5 MiB)
+25/11/06 06:59:10 INFO BlockManagerInfo: Added broadcast_5_piece0 in memory on spark-client:43523 (size: 4.0 KiB, free: 366.2 MiB)
+25/11/06 06:59:10 INFO SparkContext: Created broadcast 5 from broadcast at DAGScheduler.scala:1513
+25/11/06 06:59:10 INFO DAGScheduler: Submitting 14 missing tasks from ShuffleMapStage 3 (MapPartitionsRDD[10] at mapToPair at BwaInterpreter.java:152) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13))
+25/11/06 06:59:10 INFO YarnScheduler: Adding task set 3.0 with 14 tasks resource profile 0
+25/11/06 06:59:10 INFO BlockManagerInfo: Added broadcast_4_piece0 in memory on nm:38085 (size: 4.0 KiB, free: 366.2 MiB)
+25/11/06 06:59:14 INFO TaskSetManager: Starting task 1.0 in stage 2.0 (TID 27) (nm, executor 1, partition 1, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:14 INFO TaskSetManager: Finished task 0.0 in stage 2.0 (TID 26) in 3878 ms on nm (executor 1) (1/14)
+25/11/06 06:59:18 INFO TaskSetManager: Starting task 2.0 in stage 2.0 (TID 28) (nm, executor 1, partition 2, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:18 INFO TaskSetManager: Finished task 1.0 in stage 2.0 (TID 27) in 3604 ms on nm (executor 1) (2/14)
+25/11/06 06:59:21 INFO TaskSetManager: Starting task 3.0 in stage 2.0 (TID 29) (nm, executor 1, partition 3, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:21 INFO TaskSetManager: Finished task 2.0 in stage 2.0 (TID 28) in 3549 ms on nm (executor 1) (3/14)
+25/11/06 06:59:25 INFO TaskSetManager: Starting task 4.0 in stage 2.0 (TID 30) (nm, executor 1, partition 4, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:25 INFO TaskSetManager: Finished task 3.0 in stage 2.0 (TID 29) in 3506 ms on nm (executor 1) (4/14)
+25/11/06 06:59:28 INFO TaskSetManager: Starting task 5.0 in stage 2.0 (TID 31) (nm, executor 1, partition 5, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:28 INFO TaskSetManager: Finished task 4.0 in stage 2.0 (TID 30) in 3604 ms on nm (executor 1) (5/14)
+25/11/06 06:59:32 INFO TaskSetManager: Starting task 6.0 in stage 2.0 (TID 32) (nm, executor 1, partition 6, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:32 INFO TaskSetManager: Finished task 5.0 in stage 2.0 (TID 31) in 3553 ms on nm (executor 1) (6/14)
+25/11/06 06:59:36 INFO TaskSetManager: Starting task 7.0 in stage 2.0 (TID 33) (nm, executor 1, partition 7, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:36 INFO TaskSetManager: Finished task 6.0 in stage 2.0 (TID 32) in 3561 ms on nm (executor 1) (7/14)
+25/11/06 06:59:39 INFO TaskSetManager: Starting task 8.0 in stage 2.0 (TID 34) (nm, executor 1, partition 8, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:39 INFO TaskSetManager: Finished task 7.0 in stage 2.0 (TID 33) in 3545 ms on nm (executor 1) (8/14)
+25/11/06 06:59:43 INFO TaskSetManager: Starting task 9.0 in stage 2.0 (TID 35) (nm, executor 1, partition 9, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:43 INFO TaskSetManager: Finished task 8.0 in stage 2.0 (TID 34) in 3533 ms on nm (executor 1) (9/14)
+25/11/06 06:59:46 INFO TaskSetManager: Starting task 10.0 in stage 2.0 (TID 36) (nm, executor 1, partition 10, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:46 INFO TaskSetManager: Finished task 9.0 in stage 2.0 (TID 35) in 3532 ms on nm (executor 1) (10/14)
+25/11/06 06:59:50 INFO TaskSetManager: Starting task 11.0 in stage 2.0 (TID 37) (nm, executor 1, partition 11, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:50 INFO TaskSetManager: Finished task 10.0 in stage 2.0 (TID 36) in 3581 ms on nm (executor 1) (11/14)
+25/11/06 06:59:53 INFO TaskSetManager: Starting task 12.0 in stage 2.0 (TID 38) (nm, executor 1, partition 12, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:53 INFO TaskSetManager: Finished task 11.0 in stage 2.0 (TID 37) in 3533 ms on nm (executor 1) (12/14)
+25/11/06 06:59:57 INFO TaskSetManager: Starting task 13.0 in stage 2.0 (TID 39) (nm, executor 1, partition 13, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:57 INFO TaskSetManager: Finished task 12.0 in stage 2.0 (TID 38) in 3580 ms on nm (executor 1) (13/14)
+25/11/06 06:59:58 INFO TaskSetManager: Starting task 0.0 in stage 3.0 (TID 40) (nm, executor 1, partition 0, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 06:59:58 INFO TaskSetManager: Finished task 13.0 in stage 2.0 (TID 39) in 1605 ms on nm (executor 1) (14/14)
+25/11/06 06:59:58 INFO YarnScheduler: Removed TaskSet 2.0, whose tasks have all completed, from pool 
+25/11/06 06:59:58 INFO DAGScheduler: ShuffleMapStage 2 (mapToPair at BwaInterpreter.java:152) finished in 48.156 s
+25/11/06 06:59:58 INFO DAGScheduler: looking for newly runnable stages
+25/11/06 06:59:58 INFO DAGScheduler: running: Set(ShuffleMapStage 3)
+25/11/06 06:59:58 INFO DAGScheduler: waiting: Set(ResultStage 5, ShuffleMapStage 4)
+25/11/06 06:59:58 INFO DAGScheduler: failed: Set()
+25/11/06 06:59:59 INFO BlockManagerInfo: Added broadcast_5_piece0 in memory on nm:38085 (size: 4.0 KiB, free: 366.2 MiB)
+25/11/06 07:00:02 INFO TaskSetManager: Starting task 1.0 in stage 3.0 (TID 41) (nm, executor 1, partition 1, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 07:00:02 INFO TaskSetManager: Finished task 0.0 in stage 3.0 (TID 40) in 3639 ms on nm (executor 1) (1/14)
+25/11/06 07:00:06 INFO TaskSetManager: Starting task 2.0 in stage 3.0 (TID 42) (nm, executor 1, partition 2, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 07:00:06 INFO TaskSetManager: Finished task 1.0 in stage 3.0 (TID 41) in 3625 ms on nm (executor 1) (2/14)
+25/11/06 07:00:09 INFO TaskSetManager: Starting task 3.0 in stage 3.0 (TID 43) (nm, executor 1, partition 3, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 07:00:09 INFO TaskSetManager: Finished task 2.0 in stage 3.0 (TID 42) in 3562 ms on nm (executor 1) (3/14)
+25/11/06 07:00:13 INFO TaskSetManager: Starting task 4.0 in stage 3.0 (TID 44) (nm, executor 1, partition 4, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 07:00:13 INFO TaskSetManager: Finished task 3.0 in stage 3.0 (TID 43) in 3581 ms on nm (executor 1) (4/14)
+25/11/06 07:00:17 INFO TaskSetManager: Starting task 5.0 in stage 3.0 (TID 45) (nm, executor 1, partition 5, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 07:00:17 INFO TaskSetManager: Finished task 4.0 in stage 3.0 (TID 44) in 3623 ms on nm (executor 1) (5/14)
+25/11/06 07:00:20 INFO TaskSetManager: Starting task 6.0 in stage 3.0 (TID 46) (nm, executor 1, partition 6, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 07:00:20 INFO TaskSetManager: Finished task 5.0 in stage 3.0 (TID 45) in 3586 ms on nm (executor 1) (6/14)
+25/11/06 07:00:24 INFO TaskSetManager: Starting task 7.0 in stage 3.0 (TID 47) (nm, executor 1, partition 7, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 07:00:24 INFO TaskSetManager: Finished task 6.0 in stage 3.0 (TID 46) in 3565 ms on nm (executor 1) (7/14)
+25/11/06 07:00:27 INFO TaskSetManager: Starting task 8.0 in stage 3.0 (TID 48) (nm, executor 1, partition 8, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 07:00:27 INFO TaskSetManager: Finished task 7.0 in stage 3.0 (TID 47) in 3609 ms on nm (executor 1) (8/14)
+25/11/06 07:00:31 INFO TaskSetManager: Starting task 9.0 in stage 3.0 (TID 49) (nm, executor 1, partition 9, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 07:00:31 INFO TaskSetManager: Finished task 8.0 in stage 3.0 (TID 48) in 3526 ms on nm (executor 1) (9/14)
+25/11/06 07:00:34 INFO TaskSetManager: Starting task 10.0 in stage 3.0 (TID 50) (nm, executor 1, partition 10, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 07:00:34 INFO TaskSetManager: Finished task 9.0 in stage 3.0 (TID 49) in 3555 ms on nm (executor 1) (10/14)
+25/11/06 07:00:38 INFO TaskSetManager: Starting task 11.0 in stage 3.0 (TID 51) (nm, executor 1, partition 11, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 07:00:38 INFO TaskSetManager: Finished task 10.0 in stage 3.0 (TID 50) in 3606 ms on nm (executor 1) (11/14)
+25/11/06 07:00:42 INFO TaskSetManager: Starting task 12.0 in stage 3.0 (TID 52) (nm, executor 1, partition 12, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 07:00:42 INFO TaskSetManager: Finished task 11.0 in stage 3.0 (TID 51) in 3573 ms on nm (executor 1) (12/14)
+25/11/06 07:00:45 INFO TaskSetManager: Starting task 13.0 in stage 3.0 (TID 53) (nm, executor 1, partition 13, RACK_LOCAL, 4626 bytes) taskResourceAssignments Map()
+25/11/06 07:00:45 INFO TaskSetManager: Finished task 12.0 in stage 3.0 (TID 52) in 3517 ms on nm (executor 1) (13/14)
+25/11/06 07:00:47 INFO TaskSetManager: Finished task 13.0 in stage 3.0 (TID 53) in 1583 ms on nm (executor 1) (14/14)
+25/11/06 07:00:47 INFO YarnScheduler: Removed TaskSet 3.0, whose tasks have all completed, from pool 
+25/11/06 07:00:47 INFO DAGScheduler: ShuffleMapStage 3 (mapToPair at BwaInterpreter.java:152) finished in 96.263 s
+25/11/06 07:00:47 INFO DAGScheduler: looking for newly runnable stages
+25/11/06 07:00:47 INFO DAGScheduler: running: Set()
+25/11/06 07:00:47 INFO DAGScheduler: waiting: Set(ResultStage 5, ShuffleMapStage 4)
+25/11/06 07:00:47 INFO DAGScheduler: failed: Set()
+25/11/06 07:00:47 INFO DAGScheduler: Submitting ShuffleMapStage 4 (MapPartitionsRDD[17] at repartition at BwaInterpreter.java:281), which has no missing parents
+25/11/06 07:00:47 INFO MemoryStore: Block broadcast_6 stored as values in memory (estimated size 11.2 KiB, free 365.5 MiB)
+25/11/06 07:00:47 INFO MemoryStore: Block broadcast_6_piece0 stored as bytes in memory (estimated size 5.4 KiB, free 365.5 MiB)
+25/11/06 07:00:47 INFO BlockManagerInfo: Added broadcast_6_piece0 in memory on spark-client:43523 (size: 5.4 KiB, free: 366.2 MiB)
+25/11/06 07:00:47 INFO SparkContext: Created broadcast 6 from broadcast at DAGScheduler.scala:1513
+25/11/06 07:00:47 INFO DAGScheduler: Submitting 14 missing tasks from ShuffleMapStage 4 (MapPartitionsRDD[17] at repartition at BwaInterpreter.java:281) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13))
+25/11/06 07:00:47 INFO YarnScheduler: Adding task set 4.0 with 14 tasks resource profile 0
+25/11/06 07:00:47 INFO TaskSetManager: Starting task 0.0 in stage 4.0 (TID 54) (nm, executor 1, partition 0, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:00:47 INFO BlockManagerInfo: Added broadcast_6_piece0 in memory on nm:38085 (size: 5.4 KiB, free: 366.2 MiB)
+25/11/06 07:00:47 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 2 to 172.20.0.5:54180
+25/11/06 07:00:55 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 1 to 172.20.0.5:54180
+25/11/06 07:01:21 INFO TaskSetManager: Starting task 1.0 in stage 4.0 (TID 55) (nm, executor 1, partition 1, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:01:21 INFO TaskSetManager: Finished task 0.0 in stage 4.0 (TID 54) in 33939 ms on nm (executor 1) (1/14)
+25/11/06 07:01:53 INFO TaskSetManager: Starting task 2.0 in stage 4.0 (TID 56) (nm, executor 1, partition 2, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:01:53 INFO TaskSetManager: Finished task 1.0 in stage 4.0 (TID 55) in 32848 ms on nm (executor 1) (2/14)
+25/11/06 07:02:30 INFO TaskSetManager: Starting task 3.0 in stage 4.0 (TID 57) (nm, executor 1, partition 3, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:02:30 INFO TaskSetManager: Finished task 2.0 in stage 4.0 (TID 56) in 36328 ms on nm (executor 1) (3/14)
+25/11/06 07:03:05 INFO TaskSetManager: Starting task 4.0 in stage 4.0 (TID 58) (nm, executor 1, partition 4, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:03:05 INFO TaskSetManager: Finished task 3.0 in stage 4.0 (TID 57) in 34966 ms on nm (executor 1) (4/14)
+25/11/06 07:03:40 INFO TaskSetManager: Starting task 5.0 in stage 4.0 (TID 59) (nm, executor 1, partition 5, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:03:40 INFO TaskSetManager: Finished task 4.0 in stage 4.0 (TID 58) in 35324 ms on nm (executor 1) (5/14)
+25/11/06 07:04:13 INFO TaskSetManager: Starting task 6.0 in stage 4.0 (TID 60) (nm, executor 1, partition 6, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:04:13 INFO TaskSetManager: Finished task 5.0 in stage 4.0 (TID 59) in 33402 ms on nm (executor 1) (6/14)
+25/11/06 07:04:49 INFO TaskSetManager: Starting task 7.0 in stage 4.0 (TID 61) (nm, executor 1, partition 7, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:04:49 INFO TaskSetManager: Finished task 6.0 in stage 4.0 (TID 60) in 35255 ms on nm (executor 1) (7/14)
+25/11/06 07:05:23 INFO TaskSetManager: Starting task 8.0 in stage 4.0 (TID 62) (nm, executor 1, partition 8, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:05:23 INFO TaskSetManager: Finished task 7.0 in stage 4.0 (TID 61) in 33948 ms on nm (executor 1) (8/14)
+25/11/06 07:05:55 INFO TaskSetManager: Starting task 9.0 in stage 4.0 (TID 63) (nm, executor 1, partition 9, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:05:55 INFO TaskSetManager: Finished task 8.0 in stage 4.0 (TID 62) in 32607 ms on nm (executor 1) (9/14)
+25/11/06 07:06:30 INFO TaskSetManager: Starting task 10.0 in stage 4.0 (TID 64) (nm, executor 1, partition 10, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:06:30 INFO TaskSetManager: Finished task 9.0 in stage 4.0 (TID 63) in 35234 ms on nm (executor 1) (10/14)
+25/11/06 07:07:04 INFO TaskSetManager: Starting task 11.0 in stage 4.0 (TID 65) (nm, executor 1, partition 11, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:07:04 INFO TaskSetManager: Finished task 10.0 in stage 4.0 (TID 64) in 33034 ms on nm (executor 1) (11/14)
+25/11/06 07:07:38 INFO TaskSetManager: Starting task 12.0 in stage 4.0 (TID 66) (nm, executor 1, partition 12, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:07:38 INFO TaskSetManager: Finished task 11.0 in stage 4.0 (TID 65) in 34525 ms on nm (executor 1) (12/14)
+25/11/06 07:08:13 INFO TaskSetManager: Starting task 13.0 in stage 4.0 (TID 67) (nm, executor 1, partition 13, NODE_LOCAL, 4510 bytes) taskResourceAssignments Map()
+25/11/06 07:08:13 INFO TaskSetManager: Finished task 12.0 in stage 4.0 (TID 66) in 34885 ms on nm (executor 1) (13/14)
+25/11/06 07:08:49 INFO TaskSetManager: Finished task 13.0 in stage 4.0 (TID 67) in 36066 ms on nm (executor 1) (14/14)
+25/11/06 07:08:49 INFO YarnScheduler: Removed TaskSet 4.0, whose tasks have all completed, from pool 
+25/11/06 07:08:49 INFO DAGScheduler: ShuffleMapStage 4 (repartition at BwaInterpreter.java:281) finished in 482.365 s
+25/11/06 07:08:49 INFO DAGScheduler: looking for newly runnable stages
+25/11/06 07:08:49 INFO DAGScheduler: running: Set()
+25/11/06 07:08:49 INFO DAGScheduler: waiting: Set(ResultStage 5)
+25/11/06 07:08:49 INFO DAGScheduler: failed: Set()
+25/11/06 07:08:49 INFO DAGScheduler: Submitting ResultStage 5 (MapPartitionsRDD[22] at mapPartitionsWithIndex at BwaInterpreter.java:304), which has no missing parents
+25/11/06 07:08:49 INFO MemoryStore: Block broadcast_7 stored as values in memory (estimated size 7.5 KiB, free 365.5 MiB)
+25/11/06 07:08:49 INFO MemoryStore: Block broadcast_7_piece0 stored as bytes in memory (estimated size 4.0 KiB, free 365.5 MiB)
+25/11/06 07:08:49 INFO BlockManagerInfo: Added broadcast_7_piece0 in memory on spark-client:43523 (size: 4.0 KiB, free: 366.2 MiB)
+25/11/06 07:08:49 INFO SparkContext: Created broadcast 7 from broadcast at DAGScheduler.scala:1513
+25/11/06 07:08:49 INFO DAGScheduler: Submitting 32 missing tasks from ResultStage 5 (MapPartitionsRDD[22] at mapPartitionsWithIndex at BwaInterpreter.java:304) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14))
+25/11/06 07:08:49 INFO YarnScheduler: Adding task set 5.0 with 32 tasks resource profile 0
+25/11/06 07:08:49 INFO TaskSetManager: Starting task 0.0 in stage 5.0 (TID 68) (nm, executor 1, partition 0, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:08:49 INFO BlockManagerInfo: Added broadcast_7_piece0 in memory on nm:38085 (size: 4.0 KiB, free: 366.2 MiB)
+25/11/06 07:08:49 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 0 to 172.20.0.5:54180
+25/11/06 07:10:04 INFO BlockManagerInfo: Removed broadcast_5_piece0 on spark-client:43523 in memory (size: 4.0 KiB, free: 366.2 MiB)
+25/11/06 07:10:04 INFO BlockManagerInfo: Removed broadcast_5_piece0 on nm:38085 in memory (size: 4.0 KiB, free: 366.2 MiB)
+25/11/06 07:10:04 INFO BlockManagerInfo: Removed broadcast_4_piece0 on spark-client:43523 in memory (size: 4.0 KiB, free: 366.2 MiB)
+25/11/06 07:10:04 INFO BlockManagerInfo: Removed broadcast_4_piece0 on nm:38085 in memory (size: 4.0 KiB, free: 366.2 MiB)
+25/11/06 07:10:04 INFO BlockManagerInfo: Removed broadcast_6_piece0 on spark-client:43523 in memory (size: 5.4 KiB, free: 366.2 MiB)
+25/11/06 07:10:04 INFO BlockManagerInfo: Removed broadcast_6_piece0 on nm:38085 in memory (size: 5.4 KiB, free: 366.2 MiB)
+25/11/06 07:10:42 INFO TaskSetManager: Starting task 1.0 in stage 5.0 (TID 69) (nm, executor 1, partition 1, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:10:42 INFO TaskSetManager: Finished task 0.0 in stage 5.0 (TID 68) in 113420 ms on nm (executor 1) (1/32)
+25/11/06 07:12:42 INFO TaskSetManager: Starting task 2.0 in stage 5.0 (TID 70) (nm, executor 1, partition 2, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:12:42 INFO TaskSetManager: Finished task 1.0 in stage 5.0 (TID 69) in 119091 ms on nm (executor 1) (2/32)
+25/11/06 07:14:41 INFO TaskSetManager: Starting task 3.0 in stage 5.0 (TID 71) (nm, executor 1, partition 3, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:14:41 INFO TaskSetManager: Finished task 2.0 in stage 5.0 (TID 70) in 119233 ms on nm (executor 1) (3/32)
+25/11/06 07:16:38 INFO TaskSetManager: Starting task 4.0 in stage 5.0 (TID 72) (nm, executor 1, partition 4, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:16:38 INFO TaskSetManager: Finished task 3.0 in stage 5.0 (TID 71) in 117468 ms on nm (executor 1) (4/32)
+25/11/06 07:18:33 INFO TaskSetManager: Starting task 5.0 in stage 5.0 (TID 73) (nm, executor 1, partition 5, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:18:33 INFO TaskSetManager: Finished task 4.0 in stage 5.0 (TID 72) in 114587 ms on nm (executor 1) (5/32)
+25/11/06 07:20:32 INFO TaskSetManager: Starting task 6.0 in stage 5.0 (TID 74) (nm, executor 1, partition 6, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:20:32 INFO TaskSetManager: Finished task 5.0 in stage 5.0 (TID 73) in 118741 ms on nm (executor 1) (6/32)
+25/11/06 07:22:24 INFO TaskSetManager: Starting task 7.0 in stage 5.0 (TID 75) (nm, executor 1, partition 7, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:22:24 INFO TaskSetManager: Finished task 6.0 in stage 5.0 (TID 74) in 112120 ms on nm (executor 1) (7/32)
+25/11/06 07:24:22 INFO TaskSetManager: Starting task 8.0 in stage 5.0 (TID 76) (nm, executor 1, partition 8, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:24:22 INFO TaskSetManager: Finished task 7.0 in stage 5.0 (TID 75) in 118354 ms on nm (executor 1) (8/32)
+
+
+
+25/11/06 07:26:20 INFO TaskSetManager: Starting task 9.0 in stage 5.0 (TID 77) (nm, executor 1, partition 9, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:26:20 INFO TaskSetManager: Finished task 8.0 in stage 5.0 (TID 76) in 118235 ms on nm (executor 1) (9/32)
+25/11/06 07:28:20 INFO TaskSetManager: Starting task 10.0 in stage 5.0 (TID 78) (nm, executor 1, partition 10, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:28:20 INFO TaskSetManager: Finished task 9.0 in stage 5.0 (TID 77) in 119357 ms on nm (executor 1) (10/32)
+25/11/06 07:30:18 INFO TaskSetManager: Starting task 11.0 in stage 5.0 (TID 79) (nm, executor 1, partition 11, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:30:18 INFO TaskSetManager: Finished task 10.0 in stage 5.0 (TID 78) in 117982 ms on nm (executor 1) (11/32)
+25/11/06 07:32:15 INFO TaskSetManager: Starting task 12.0 in stage 5.0 (TID 80) (nm, executor 1, partition 12, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:32:15 INFO TaskSetManager: Finished task 11.0 in stage 5.0 (TID 79) in 117348 ms on nm (executor 1) (12/32)
+25/11/06 07:34:12 INFO TaskSetManager: Starting task 13.0 in stage 5.0 (TID 81) (nm, executor 1, partition 13, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:34:12 INFO TaskSetManager: Finished task 12.0 in stage 5.0 (TID 80) in 117011 ms on nm (executor 1) (13/32)
+25/11/06 07:36:10 INFO TaskSetManager: Starting task 14.0 in stage 5.0 (TID 82) (nm, executor 1, partition 14, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:36:10 INFO TaskSetManager: Finished task 13.0 in stage 5.0 (TID 81) in 117603 ms on nm (executor 1) (14/32)
+25/11/06 07:38:07 INFO TaskSetManager: Starting task 15.0 in stage 5.0 (TID 83) (nm, executor 1, partition 15, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:38:07 INFO TaskSetManager: Finished task 14.0 in stage 5.0 (TID 82) in 117277 ms on nm (executor 1) (15/32)
+25/11/06 07:40:04 INFO TaskSetManager: Starting task 16.0 in stage 5.0 (TID 84) (nm, executor 1, partition 16, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:40:04 INFO TaskSetManager: Finished task 15.0 in stage 5.0 (TID 83) in 117134 ms on nm (executor 1) (16/32)
+25/11/06 07:42:02 INFO TaskSetManager: Starting task 17.0 in stage 5.0 (TID 85) (nm, executor 1, partition 17, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:42:02 INFO TaskSetManager: Finished task 16.0 in stage 5.0 (TID 84) in 118486 ms on nm (executor 1) (17/32)
+25/11/06 07:43:59 INFO TaskSetManager: Starting task 18.0 in stage 5.0 (TID 86) (nm, executor 1, partition 18, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:43:59 INFO TaskSetManager: Finished task 17.0 in stage 5.0 (TID 85) in 116954 ms on nm (executor 1) (18/32)
+25/11/06 07:45:58 INFO TaskSetManager: Starting task 19.0 in stage 5.0 (TID 87) (nm, executor 1, partition 19, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:45:58 INFO TaskSetManager: Finished task 18.0 in stage 5.0 (TID 86) in 118231 ms on nm (executor 1) (19/32)
+25/11/06 07:47:55 INFO TaskSetManager: Starting task 20.0 in stage 5.0 (TID 88) (nm, executor 1, partition 20, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:47:55 INFO TaskSetManager: Finished task 19.0 in stage 5.0 (TID 87) in 117259 ms on nm (executor 1) (20/32)
+25/11/06 07:49:52 INFO TaskSetManager: Starting task 21.0 in stage 5.0 (TID 89) (nm, executor 1, partition 21, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:49:52 INFO TaskSetManager: Finished task 20.0 in stage 5.0 (TID 88) in 116835 ms on nm (executor 1) (21/32)
+25/11/06 07:51:42 INFO TaskSetManager: Starting task 22.0 in stage 5.0 (TID 90) (nm, executor 1, partition 22, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:51:42 INFO TaskSetManager: Finished task 21.0 in stage 5.0 (TID 89) in 110705 ms on nm (executor 1) (22/32)
+25/11/06 07:53:34 INFO TaskSetManager: Starting task 23.0 in stage 5.0 (TID 91) (nm, executor 1, partition 23, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:53:34 INFO TaskSetManager: Finished task 22.0 in stage 5.0 (TID 90) in 111980 ms on nm (executor 1) (23/32)
+25/11/06 07:55:32 INFO TaskSetManager: Starting task 24.0 in stage 5.0 (TID 92) (nm, executor 1, partition 24, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:55:32 INFO TaskSetManager: Finished task 23.0 in stage 5.0 (TID 91) in 117806 ms on nm (executor 1) (24/32)
+25/11/06 07:57:25 INFO TaskSetManager: Starting task 25.0 in stage 5.0 (TID 93) (nm, executor 1, partition 25, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:57:25 INFO TaskSetManager: Finished task 24.0 in stage 5.0 (TID 92) in 112958 ms on nm (executor 1) (25/32)
+25/11/06 07:59:24 INFO TaskSetManager: Starting task 26.0 in stage 5.0 (TID 94) (nm, executor 1, partition 26, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 07:59:24 INFO TaskSetManager: Finished task 25.0 in stage 5.0 (TID 93) in 118409 ms on nm (executor 1) (26/32)
+25/11/06 08:01:21 INFO TaskSetManager: Starting task 27.0 in stage 5.0 (TID 95) (nm, executor 1, partition 27, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 08:01:21 INFO TaskSetManager: Finished task 26.0 in stage 5.0 (TID 94) in 117179 ms on nm (executor 1) (27/32)
+25/11/06 08:03:18 INFO TaskSetManager: Starting task 28.0 in stage 5.0 (TID 96) (nm, executor 1, partition 28, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 08:03:18 INFO TaskSetManager: Finished task 27.0 in stage 5.0 (TID 95) in 117346 ms on nm (executor 1) (28/32)
+25/11/06 08:05:17 INFO TaskSetManager: Starting task 29.0 in stage 5.0 (TID 97) (nm, executor 1, partition 29, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 08:05:17 INFO TaskSetManager: Finished task 28.0 in stage 5.0 (TID 96) in 118735 ms on nm (executor 1) (29/32)
+25/11/06 08:07:14 INFO TaskSetManager: Starting task 30.0 in stage 5.0 (TID 98) (nm, executor 1, partition 30, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 08:07:14 INFO TaskSetManager: Finished task 29.0 in stage 5.0 (TID 97) in 117674 ms on nm (executor 1) (30/32)
+25/11/06 08:09:12 INFO TaskSetManager: Starting task 31.0 in stage 5.0 (TID 99) (nm, executor 1, partition 31, NODE_LOCAL, 4558 bytes) taskResourceAssignments Map()
+25/11/06 08:09:12 INFO TaskSetManager: Finished task 30.0 in stage 5.0 (TID 98) in 117680 ms on nm (executor 1) (31/32)
+ 25/11/06 08:11:11 INFO TaskSetManager: Finished task 31.0 in stage 5.0 (TID 99) in 118680 ms on nm (executor 1) (32/32)
+25/11/06 08:11:11 INFO YarnScheduler: Removed TaskSet 5.0, whose tasks have all completed, from pool 
+25/11/06 08:11:11 INFO DAGScheduler: ResultStage 5 (collect at BwaInterpreter.java:305) finished in 3741.849 s
+25/11/06 08:11:11 INFO DAGScheduler: Job 2 is finished. Cancelling potential speculative or zombie tasks for this job
+25/11/06 08:11:11 INFO YarnScheduler: Killing all running tasks in stage 5: Stage finished
+25/11/06 08:11:11 INFO DAGScheduler: Job 2 finished: collect at BwaInterpreter.java:305, took 4320.542446 s
+25/11/06 08:11:11 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-0.sam
+25/11/06 08:11:12 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-1.sam
+25/11/06 08:11:12 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-2.sam
+25/11/06 08:11:13 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-3.sam
+25/11/06 08:11:13 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-4.sam
+25/11/06 08:11:14 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-5.sam
+25/11/06 08:11:15 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-6.sam
+25/11/06 08:11:15 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-7.sam
+25/11/06 08:11:16 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-8.sam
+25/11/06 08:11:16 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-9.sam
+25/11/06 08:11:17 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-10.sam
+25/11/06 08:11:17 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-11.sam
+25/11/06 08:11:18 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-12.sam
+25/11/06 08:11:18 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-13.sam
+25/11/06 08:11:19 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-14.sam
+25/11/06 08:11:20 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-15.sam
+25/11/06 08:11:20 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-16.sam
+25/11/06 08:11:21 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-17.sam
+25/11/06 08:11:21 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-18.sam
+25/11/06 08:11:22 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-19.sam
+25/11/06 08:11:22 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-20.sam
+25/11/06 08:11:23 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-21.sam
+25/11/06 08:11:24 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-22.sam
+25/11/06 08:11:24 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-23.sam
+25/11/06 08:11:25 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-24.sam
+25/11/06 08:11:25 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-25.sam
+25/11/06 08:11:26 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-26.sam
+25/11/06 08:11:26 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-27.sam
+25/11/06 08:11:27 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-28.sam
+25/11/06 08:11:28 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-29.sam
+25/11/06 08:11:28 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-30.sam
+25/11/06 08:11:29 INFO BwaInterpreter: JMAbuin:: SparkBWA :: Returned file ::Output_ERR000589_2258/SparkBWA_ERR000589_1.filt.fastq-32-NoSort-application_1762401512426_0006-31.sam
+25/11/06 08:11:29 INFO SparkContext: Invoking stop() from shutdown hook
+25/11/06 08:11:29 INFO SparkUI: Stopped Spark web UI at http://spark-client:4040
+25/11/06 08:11:29 INFO YarnClientSchedulerBackend: Interrupting monitor thread
+25/11/06 08:11:30 INFO YarnClientSchedulerBackend: Shutting down all executors
+25/11/06 08:11:30 INFO YarnSchedulerBackend$YarnDriverEndpoint: Asking each executor to shut down
+25/11/06 08:11:30 INFO YarnClientSchedulerBackend: YARN client scheduler backend Stopped
+25/11/06 08:11:30 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+25/11/06 08:11:30 INFO MemoryStore: MemoryStore cleared
+25/11/06 08:11:30 INFO BlockManager: BlockManager stopped
+25/11/06 08:11:30 INFO BlockManagerMaster: BlockManagerMaster stopped
+25/11/06 08:11:30 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+25/11/06 08:11:30 INFO SparkContext: Successfully stopped SparkContext
+25/11/06 08:11:30 INFO ShutdownHookManager: Shutdown hook called
+25/11/06 08:11:30 INFO ShutdownHookManager: Deleting directory /tmp/spark-9766e185-2cc9-4fdc-b31b-3e867f948440
+25/11/06 08:11:30 INFO ShutdownHookManager: Deleting directory /tmp/spark-df566780-c38d-4e01-8875-80e16a99d010
+root@spark-client:/work# 
+root@spark-client:/work# 
+root@spark-client:/work# 
+root@spark-client:/work#  hdfs dfs -ls Output_ERR000589_2258
+WARNING: log4j.properties is not found. HADOOP_CONF_DIR may be incomplete.
+Found 1 items
+-rw-r--r--   1 root supergroup 4244932070 2025-11-06 08:11 Output_ERR000589_2258/FullOutput.sam
+root@spark-client:/work# hdfs dfs -get Output_ERR000589_2258
+WARNING: log4j.properties is not found. HADOOP_CONF_DIR may be incomplete.
+root@spark-client:/work# ls
+chr22.fa.gz             ERR000589_2.filt.fastq  Output_ERR000589_2258  SparkBWA-jdk8-spark3.jar     SparkBWA-jdk8-spark3-v3.jar
+ERR000589_1.filt.fastq  hg38                    sample1.sam            SparkBWA-jdk8-spark3-v2.jar  tmp
+root@spark-client:/work# cd Output_ERR000589_2258/
+root@spark-client:/work/Output_ERR000589_2258# ls
+FullOutput.sam
+root@spark-client:/work/Output_ERR000589_2258# ls -al
+total 4145456
+drwxr-xr-x 2 root root       4096 Nov  6 08:14 .
+drwxrwxr-x 5 1000  999       4096 Nov  6 08:14 ..
+-rw-r--r-- 1 root root 4244932070 Nov  6 08:14 FullOutput.sam
+root@spark-client:/work/Output_ERR000589_2258# ls -alh
+total 4.0G
+drwxr-xr-x 2 root root 4.0K Nov  6 08:14 .
+drwxrwxr-x 5 1000  999 4.0K Nov  6 08:14 ..
+-rw-r--r-- 1 root root 4.0G Nov  6 08:14 FullOutput.sam
+root@spark-client:/work/Output_ERR000589_2258# head FullOutput.sam 
+@SQ     SN:chr22        LN:50818468
+@RG     ID:foo  LB:bar  PL:illumina     PU:illumina     SM:ERR000589
+@PG     ID:bwa  PN:bwa  VN:0.7.15-r1140 CL:bwa mem -R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589 /work/hg38/chr22.fa /tmp/application_1762401512426_0006-RDD0_1 /tmp/application_1762401512426_0006-RDD0_2
+ERR000589.150   83      chr22   16260053        0       19S32M  =       16260687        604     TTCGTTCCGTTCAATGATTATTCCATTCGAGTCCATTCGATGATTCCATTC    #;0,&(+E447*'G2H+<%4I)GI3#AII(I=0IE/8IID6I.IIIIIIII      NM:i:1  MD:Z:19T12      AS:i:27 XS:i:38 RG:Z:foo
+ERR000589.150   163     chr22   16260687        60      51M     =       16260053        -604    TGATGAGTCCATCCATTTCAATTTCATGGTAATTCCATTCGTTTCAATTCG    IIIII:I48IIII+III.-I<IID*<4II-F$?)&/C114?+2,/,+2)*4      NM:i:2  MD:Z:28A6T15    AS:i:41 XS:i:0  RG:Z:foo
+ERR000589.604   77      *       0       0       *       *       0       0       GTGAAACTAGGTTCTTCAGTAAAGACGCAGATTATTTTTTATCCTTAGTTG     IIIIIIII3IIAI3IIIII7BI(IAFIH.I%I3@5?I-I7(94AI.+6<59     AS:i:0  XS:i:0  RG:Z:foo
+ERR000589.604   141     *       0       0       *       *       0       0       TGCACCTGGGGAGCTTTTAAACATCCCAATTCTCAAGCCTGCACCACAGAA     III9I'IIII2ICI;IIIIIA8<I83>I5FA2?1&1I//6G?:*..)+D)'     AS:i:0  XS:i:0  RG:Z:foo
+ERR000589.1055  99      chr22   16042678        19      6S45M   =       16042320        -330    TAAACACTGTGAGTTCAATGCACACATCCCAAAGCAGTTTCTGAGAATGAT    IICIIII7IIIDI+>IEIAII7:@H0;=7%341<F<'(7=5G41/+%-3%=      NM:i:3  MD:Z:22A5A14C1  AS:i:33 XS:i:33 RG:Z:foo        XA:Z:chr22,+15169294,51M,5;chr22,+15172029,51M,5;chr22,+16037704,6S43M2S,3;chr22,+15193692,2S47M2S,4;
+ERR000589.1055  147     chr22   16042320        6       30M21S  =       16042678        330     TAAAGGAAGGTTCAACTCTGTGAGTTGAATACCCACCACAAAAAGAAGTTA    .%+&$*+&&++&,+1,&+'&&17)(.7%,601$D=<I&IGIICI;II=E*I      NM:i:1  MD:Z:6T23       AS:i:25 XS:i:29 RG:Z:foo
+ERR000589.1506  77      *       0       0       *       *       0       0       TGTGTCTGCTGCACCTGTGTCCACAGATCTAACCCATCTCTTCTTTTTCAT     IIII=III=FI9+IIB1II$8I5F7818IF*?@42++/,*?0)51.(-8(+     AS:i:0  XS:i:0  RG:Z:foo
+root@spark-client:/work/Output_ERR000589_2258# 
