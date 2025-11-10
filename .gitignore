@@ -7,3 +7,4 @@ target
 SparkBWA.iml
 src/main/resources/libbwa.so
 dependency-reduced-pom.xml
+SparkBWATest/spark3x_env_setup_compose/work
