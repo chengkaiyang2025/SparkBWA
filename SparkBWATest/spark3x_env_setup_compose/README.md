@@ -41,7 +41,7 @@ UIs:
 docker compose exec spark-client bash
 
 # Inside the container:
-$SPARK_HOME/bin/spark-submit       --master yarn       --deploy-mode client       --class org.apache.spark.examples.SparkPi       $SPARK_HOME/examples/jars/spark-examples_2.12-3.3.2.jar 100
+$SPARK_HOME/bin/spark-submit --master yarn --deploy-mode client --class org.apache.spark.examples.SparkPi $SPARK_HOME/examples/jars/spark-examples_2.12-3.3.2.jar 100
 ```
 
 ## Notes
