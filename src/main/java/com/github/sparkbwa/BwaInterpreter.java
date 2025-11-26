@@ -180,8 +180,9 @@ public class BwaInterpreter {
 		// Sort in memory with partitioning
 		else if ((options.getPartitionNumber() != 0) && (options.isSortFastqReads())) {
 			singleReadsKeyVal = singleReadsKeyVal.repartition(options.getPartitionNumber());
-			readsRDD = singleReadsKeyVal.sortByKey().values();//.persist(StorageLevel.MEMORY_ONLY());
-			LOG.info("["+this.getClass().getName()+"] :: Repartition with sort");
+			readsRDD = singleReadsKeyVal.sortByKey().values();
+            readsRDD.saveAsTextFile(options.getOutputPath()+"line_184");
+            LOG.info("["+this.getClass().getName()+"] :: Repartition with sort");
 		}
 
 		// No Sort with no partitioning
@@ -210,7 +211,7 @@ public class BwaInterpreter {
 			readsRDD = singleReadsKeyVal
 				.repartition(options.getPartitionNumber())
 				.values();
-				//.persist(StorageLevel.MEMORY_ONLY());
+            readsRDD.saveAsTextFile(options.getOutputPath()+"line_214");
 
 		}
 
@@ -218,7 +219,7 @@ public class BwaInterpreter {
 		LOG.info("["+this.getClass().getName()+"] :: End of sorting. Timing: " + endTime);
 		LOG.info("["+this.getClass().getName()+"] :: Total time: " + (endTime - startTime) / 1e9 / 60.0 + " minutes");
 
-		//readsRDD.persist(StorageLevel.MEMORY_ONLY());
+        readsRDD.saveAsTextFile(options.getOutputPath()+"line_222");
 
 		return readsRDD;
 	}
@@ -251,7 +252,8 @@ public class BwaInterpreter {
 		// Sort in memory with partitioning
 		else if ((options.getPartitionNumber() != 0) && (options.isSortFastqReads())) {
 			pairedReadsRDD = pairedReadsRDD.repartition(options.getPartitionNumber());
-			readsRDD = pairedReadsRDD.sortByKey().values();//.persist(StorageLevel.MEMORY_ONLY());
+			readsRDD = pairedReadsRDD.sortByKey().values();
+            readsRDD.saveAsTextFile(options.getOutputPath()+"line_256");
 			LOG.info("["+this.getClass().getName()+"] :: Repartition with sort");
 		}
 
@@ -279,15 +281,15 @@ public class BwaInterpreter {
 
 			readsRDD = pairedReadsRDD
 				.repartition(options.getPartitionNumber())
-				.values();
-				//.persist(StorageLevel.MEMORY_ONLY());
+				.values() ;
+            readsRDD.saveAsTextFile(options.getOutputPath()+"line_214");
 		}
 
 		long endTime = System.nanoTime();
 
 		LOG.info("["+this.getClass().getName()+"] :: End of sorting. Timing: " + endTime);
 		LOG.info("["+this.getClass().getName()+"] :: Total time: " + (endTime - startTime) / 1e9 / 60.0 + " minutes");
-		//readsRDD.persist(StorageLevel.MEMORY_ONLY());
+        readsRDD.saveAsTextFile(options.getOutputPath()+"line_292");
 
 		return readsRDD;
 	}
