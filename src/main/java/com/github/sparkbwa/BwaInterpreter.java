@@ -353,22 +353,24 @@ public class BwaInterpreter {
 
 					String line;
 					line = br.readLine();
-
+                    LOG.info("JMAbuin:: Line ::" + line);
 					while (line != null) {
-						if (i == 0 || !line.startsWith("@")) {
+
+//						if (i == 0 || !line.startsWith("@")) {
 							//outputFinalStream.writeBytes(line+"\n");
 							outputFinalStream.write((line + "\n").getBytes());
-						}
+//						}
 
 						line = br.readLine();
 					}
 					br.close();
-
+                    LOG.info("Path :" + (new Path(returnedValues.get(i)).toString()));
 //					fs.delete(new Path(returnedValues.get(i)), true);
 				}
 
 				outputFinalStream.close();
 				fs.close();
+                LOG.info("Write successful. ");
 			} catch (IOException e) {
 				e.printStackTrace();
 				LOG.error(e.toString());

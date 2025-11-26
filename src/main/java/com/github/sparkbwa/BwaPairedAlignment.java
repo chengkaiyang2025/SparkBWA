@@ -110,11 +110,11 @@ public class BwaPairedAlignment extends BwaAlignmentBase implements Function2<In
 			returnedValues = this.runAlignmentProcess(arg0, fastqFileName1, fastqFileName2);
 
 			// Delete temporary files, as they have now been copied to the output directory
-			LOG.info("["+this.getClass().getName()+"] :: Deleting file: " + fastqFileName1);
-			FastqFile1.delete();
+			LOG.info("["+this.getClass().getName()+"] :: NOT Deleting file: " + fastqFileName1);
+//			FastqFile1.delete();
 
-			LOG.info("["+this.getClass().getName()+"] :: Deleting file: " + fastqFileName2);
-			FastqFile2.delete();
+			LOG.info("["+this.getClass().getName()+"] :: NOT Deleting file: " + fastqFileName2);
+//			FastqFile2.delete();
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
