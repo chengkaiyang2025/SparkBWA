@@ -159,11 +159,12 @@ public abstract class BwaAlignmentBase implements Serializable {
 			this.LOG.error(e.toString());
 		}
 
-		// Delete the old results file
+//		 Delete the old results file
 		File tmpSamFullFile = new File(this.bwaInterpreter.getOutputFile());
-		tmpSamFullFile.delete();
-
-		returnedValues.add(outputDir + "/" + outputSamFileName);
+//		tmpSamFullFile.delete();
+        System.out.println("ABS path of BWA result:"+tmpSamFullFile.getAbsoluteFile());
+        LOG.info("ABS path of BWA result:"+tmpSamFullFile.getAbsoluteFile());
+        returnedValues.add(outputDir + "/" + outputSamFileName);
 
 		return returnedValues;
 	}

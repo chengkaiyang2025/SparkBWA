@@ -417,7 +417,7 @@ public class Bwa implements Serializable {
 			LOG.error("["+this.getClass().getName()+"] :: BWA exited with error code: " + String.valueOf(returnCode));
 			return returnCode;
 		}
-
+        LOG.info("["+this.getClass().getName()+"] :: BWA exited with success");
 		// The run was successful
 		return 0;
 	}

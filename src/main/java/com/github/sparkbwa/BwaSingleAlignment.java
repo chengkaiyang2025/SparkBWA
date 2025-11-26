@@ -16,6 +16,8 @@
  */
 package com.github.sparkbwa;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.function.Function2;
 
@@ -29,6 +31,7 @@ import java.util.Iterator;
  * @author José M. Abuín
  */
 public class BwaSingleAlignment extends BwaAlignmentBase implements Function2<Integer, Iterator<String>, Iterator<String>> {
+    private static final Log LOG = LogFactory.getLog(BwaSingleAlignment.class); // The LOG
 
 	/**
 	 * Constructor
