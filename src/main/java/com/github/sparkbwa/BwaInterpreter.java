@@ -440,7 +440,8 @@ public class BwaInterpreter {
 
 			this.sparkConf = this.ctx.getConf();
 		}
-
+        // TODO set up here
+        this.ctx.setLocalProperty("spark.local.dir","/home/chengkaiyang/Documents/SparkBWATmpDir");
 		//The Hadoop configuration is obtained
 		this.conf = this.ctx.hadoopConfiguration();
 
