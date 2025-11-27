@@ -164,7 +164,7 @@ public class BwaInterpreter {
 
 		long startTime = System.nanoTime();
 
-		LOG.info("["+this.getClass().getName()+"] :: Not sorting in HDFS. Timing: " + startTime);
+		System.out.println("["+this.getClass().getName()+"] :: Not sorting in HDFS. Timing: " + startTime);
 
 		// Read the FASTQ file from HDFS using the FastqInputFormat class
 		JavaPairRDD<Long, String> singleReadsKeyVal = loadFastq(this.ctx, this.options.getInputPath());
@@ -174,7 +174,7 @@ public class BwaInterpreter {
 			// First, the join operation is performed. After that,
 			// a sortByKey. The resulting values are obtained
 			readsRDD = singleReadsKeyVal.sortByKey().values();
-			LOG.info("["+this.getClass().getName()+"] :: Sorting in memory without partitioning");
+			System.out.println("["+this.getClass().getName()+"] :: Sorting in memory without partitioning");
 		}
 
 		// Sort in memory with partitioning
@@ -182,18 +182,18 @@ public class BwaInterpreter {
 			singleReadsKeyVal = singleReadsKeyVal.repartition(options.getPartitionNumber());
 			readsRDD = singleReadsKeyVal.sortByKey().values();
             readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_184");
-            LOG.info("["+this.getClass().getName()+"] :: Repartition with sort");
+            System.out.println("["+this.getClass().getName()+"] :: Repartition with sort");
 		}
 
 		// No Sort with no partitioning
 		else if ((options.getPartitionNumber() == 0) && (!options.isSortFastqReads())) {
-			LOG.info("["+this.getClass().getName()+"] :: No sort and no partitioning");
+			System.out.println("["+this.getClass().getName()+"] :: No sort and no partitioning");
 			readsRDD = singleReadsKeyVal.values();
 		}
 
 		// No Sort with partitioning
 		else {
-			LOG.info("["+this.getClass().getName()+"] :: No sort with partitioning");
+			System.out.println("["+this.getClass().getName()+"] :: No sort with partitioning");
 			int numPartitions = singleReadsKeyVal.partitions().size();
 
 			/*
@@ -202,10 +202,10 @@ public class BwaInterpreter {
 			 * is used.
 			 */
 			if ((numPartitions) <= options.getPartitionNumber()) {
-				LOG.info("["+this.getClass().getName()+"] :: Repartition with no sort");
+				System.out.println("["+this.getClass().getName()+"] :: Repartition with no sort");
 			}
 			else {
-				LOG.info("["+this.getClass().getName()+"] :: Repartition(Coalesce) with no sort");
+				System.out.println("["+this.getClass().getName()+"] :: Repartition(Coalesce) with no sort");
 			}
 
 			readsRDD = singleReadsKeyVal
@@ -216,8 +216,8 @@ public class BwaInterpreter {
 		}
 
 		long endTime = System.nanoTime();
-		LOG.info("["+this.getClass().getName()+"] :: End of sorting. Timing: " + endTime);
-		LOG.info("["+this.getClass().getName()+"] :: Total time: " + (endTime - startTime) / 1e9 / 60.0 + " minutes");
+		System.out.println("["+this.getClass().getName()+"] :: End of sorting. Timing: " + endTime);
+		System.out.println("["+this.getClass().getName()+"] :: Total time: " + (endTime - startTime) / 1e9 / 60.0 + " minutes");
 
         readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_222");
 
@@ -233,7 +233,7 @@ public class BwaInterpreter {
 
 		long startTime = System.nanoTime();
 
-		LOG.info("["+this.getClass().getName()+"] ::Not sorting in HDFS. Timing: " + startTime);
+		System.out.println("["+this.getClass().getName()+"] ::Not sorting in HDFS. Timing: " + startTime);
 
 		// Read the two FASTQ files from HDFS using the loadFastq method. After that, a Spark join operation is performed
 		JavaPairRDD<Long, String> datasetTmp1 = loadFastq(this.ctx, options.getInputPath());
@@ -246,7 +246,7 @@ public class BwaInterpreter {
 		// Sort in memory with no partitioning
 		if ((options.getPartitionNumber() == 0) && (options.isSortFastqReads())) {
 			readsRDD = pairedReadsRDD.sortByKey().values();
-			LOG.info("["+this.getClass().getName()+"] :: Sorting in memory without partitioning");
+			System.out.println("["+this.getClass().getName()+"] :: Sorting in memory without partitioning");
 		}
 
 		// Sort in memory with partitioning
@@ -254,17 +254,17 @@ public class BwaInterpreter {
 			pairedReadsRDD = pairedReadsRDD.repartition(options.getPartitionNumber());
 			readsRDD = pairedReadsRDD.sortByKey().values();
             readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_256");
-			LOG.info("["+this.getClass().getName()+"] :: Repartition with sort");
+			System.out.println("["+this.getClass().getName()+"] :: Repartition with sort");
 		}
 
 		// No Sort with no partitioning
 		else if ((options.getPartitionNumber() == 0) && (!options.isSortFastqReads())) {
-			LOG.info("["+this.getClass().getName()+"] :: No sort and no partitioning");
+			System.out.println("["+this.getClass().getName()+"] :: No sort and no partitioning");
 		}
 
 		// No Sort with partitioning
 		else {
-			LOG.info("["+this.getClass().getName()+"] :: No sort with partitioning");
+			System.out.println("["+this.getClass().getName()+"] :: No sort with partitioning");
 			int numPartitions = pairedReadsRDD.partitions().size();
 
 			/*
@@ -273,10 +273,10 @@ public class BwaInterpreter {
 			 * is used.
 			 */
 			if ((numPartitions) <= options.getPartitionNumber()) {
-				LOG.info("["+this.getClass().getName()+"] :: Repartition with no sort");
+				System.out.println("["+this.getClass().getName()+"] :: Repartition with no sort");
 			}
 			else {
-				LOG.info("["+this.getClass().getName()+"] :: Repartition(Coalesce) with no sort");
+				System.out.println("["+this.getClass().getName()+"] :: Repartition(Coalesce) with no sort");
 			}
 
 			readsRDD = pairedReadsRDD
@@ -287,8 +287,8 @@ public class BwaInterpreter {
 
 		long endTime = System.nanoTime();
 
-		LOG.info("["+this.getClass().getName()+"] :: End of sorting. Timing: " + endTime);
-		LOG.info("["+this.getClass().getName()+"] :: Total time: " + (endTime - startTime) / 1e9 / 60.0 + " minutes");
+		System.out.println("["+this.getClass().getName()+"] :: End of sorting. Timing: " + endTime);
+		System.out.println("["+this.getClass().getName()+"] :: Total time: " + (endTime - startTime) / 1e9 / 60.0 + " minutes");
         readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_292");
 
 		return readsRDD;
@@ -326,7 +326,7 @@ public class BwaInterpreter {
    *     by the user.
    */
 	public void runBwa() {
-		LOG.info("["+this.getClass().getName()+"] :: Starting BWA");
+		System.out.println("["+this.getClass().getName()+"] :: Starting BWA");
 		Bwa bwa = new Bwa(this.options);
 
         JavaRDD<String> returnedValuesRdd;
@@ -352,12 +352,12 @@ public class BwaInterpreter {
 
 				// We iterate over the resulting files in HDFS and agregate them into only one file.
 				for (int i = 0; i < returnedValues.size(); i++) {
-					LOG.info("JMAbuin:: SparkBWA :: Returned file ::" + returnedValues.get(i));
+					System.out.println("JMAbuin:: SparkBWA :: Returned file ::" + returnedValues.get(i));
 					BufferedReader br = new BufferedReader(new InputStreamReader(fs.open(new Path(returnedValues.get(i)))));
 
 					String line;
 					line = br.readLine();
-                    LOG.info("JMAbuin:: Line ::" + line);
+                    System.out.println("JMAbuin:: Line ::" + line);
 					while (line != null) {
 
 //						if (i == 0 || !line.startsWith("@")) {
@@ -368,13 +368,13 @@ public class BwaInterpreter {
 						line = br.readLine();
 					}
 					br.close();
-                    LOG.info("Path :" + (new Path(returnedValues.get(i)).toString()));
+                    System.out.println("Path :" + (new Path(returnedValues.get(i)).toString()));
 //					fs.delete(new Path(returnedValues.get(i)), true);
 				}
 
 				outputFinalStream.close();
 				fs.close();
-                LOG.info("Write successful. ");
+                System.out.println("Write successful. ");
 			} catch (IOException e) {
 				e.printStackTrace();
 				LOG.error(e.toString());
@@ -382,7 +382,7 @@ public class BwaInterpreter {
 		}
 		/* // Previous version doesn't makes sense. We do not have tmp files in HDFS
 		for (String outputFile : returnedValues) {
-			LOG.info("["+this.getClass().getName()+"] :: SparkBWA:: Returned file ::" + outputFile);
+			System.out.println("["+this.getClass().getName()+"] :: SparkBWA:: Returned file ::" + outputFile);
 
 			//After the execution, if the inputTmp exists, it should be deleted
 			try {
