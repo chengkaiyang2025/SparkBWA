@@ -17,15 +17,20 @@
 package com.github.sparkbwa;
 
 import cz.adamh.utils.NativeUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Class that calls BWA functions by means of JNI
  *
  * @author José M. Abuín
  */
+
 public class BwaJni {
+    private static final Log LOG 				= LogFactory.getLog(BwaJni.class);
 
 	static {
 		try {
@@ -50,7 +55,9 @@ public class BwaJni {
 			lenStrings[i] = argumento.length();
 		}
 
+        LOG.info("Start to call native BwaJni with parameters: " + args);
 		int returnCode = new BwaJni().bwa_jni(args.length, args, lenStrings);
+        LOG.info("End to call native BwaJni with parameters: " + args + ", returnCode: " + returnCode);
 
 		return returnCode;
 	}

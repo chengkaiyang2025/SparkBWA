@@ -6,7 +6,7 @@
 
   <groupId>com.github.sparkbwa</groupId>
   <artifactId>SparkBWA</artifactId>
-  <version>jdk11-spark357-v7</version>
+  <version>jdk11-spark357-v8</version>
   <name>SparkBWA</name>
 
   <!-- JitPack repo -->

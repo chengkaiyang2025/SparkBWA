@@ -21,6 +21,7 @@ import org.apache.commons.logging.LogFactory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Class that communicates with BWA
@@ -409,7 +410,7 @@ public class Bwa implements Serializable {
 	public int run(int alnStep) {
 		// Get the list of arguments passed by the user
 		String[] parametersArray = parseParameters(alnStep);
-
+        LOG.info("["+this.getClass().getName()+"] :: Running algorithm with parameters: " + Arrays.toString(parametersArray));
 		// Call to JNI with the selected parameters
 		int returnCode = BwaJni.Bwa_Jni(parametersArray);
 
