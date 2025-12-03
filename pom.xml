@@ -69,6 +69,7 @@
         <directory>src/main/resources</directory>
         <includes>
           <include>libbwa.so</include>
+            <include>>src/main/resources</include>
         </includes>
       </resource>
     </resources>
