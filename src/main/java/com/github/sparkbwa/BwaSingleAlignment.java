@@ -53,7 +53,7 @@ public class BwaSingleAlignment extends BwaAlignmentBase implements Function2<In
 	 */
 	public Iterator<String> call(Integer arg0, Iterator<String> arg1) throws Exception {
 
-		System.out.println("["+this.getClass().getName()+"] :: Tmp dir: " + this.tmpDir);
+		LOG.info("["+this.getClass().getName()+"] :: Tmp dir: " + this.tmpDir);
 
 		String fastqFileName1;
 
@@ -66,7 +66,7 @@ public class BwaSingleAlignment extends BwaAlignmentBase implements Function2<In
 
 		}
 
-		System.out.println("["+this.getClass().getName()+"] :: Writing file: " + fastqFileName1);
+		LOG.info("["+this.getClass().getName()+"] :: Writing file: " + fastqFileName1);
 
 		File FastqFile1 = new File(fastqFileName1);
 		FileOutputStream fos1;
@@ -100,7 +100,7 @@ public class BwaSingleAlignment extends BwaAlignmentBase implements Function2<In
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("["+this.getClass().getName()+"] "+e.toString());
+			LOG.info("["+this.getClass().getName()+"] "+e.toString());
 		}
 
 		return returnedValues.iterator();

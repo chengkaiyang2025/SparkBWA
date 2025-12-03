@@ -204,6 +204,21 @@ bwa mem -t 8 -R '@RG\tID:sample1\tLB:lib1\tPL:illumina\tPU:unit1\tSM:sample1' hg
 
 
 YES
-/opt/spark-3/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 1 --verbose --num-executors 1 /home/chengkaiyang/Documents/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v6.jar  -m -r -s --index /home/chengkaiyang/Documents/files/chr22/chr22.fa -n 32 -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" ERR000589_1.filt.fastq Output_ERR000589_20252050
+/opt/spark-3/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 1 --verbose --num-executors 1 /home/chengkaiyang/Documents/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v6.jar  -m -r -s --index /home/chengkaiyang/Documents/files/chr22 -n 32 -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" ERR000589_1.filt.fastq Output_ERR000589_20251126_2021
+
 NO 
 /opt/spark-3/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 1 --verbose --num-executors 1 /home/chengkaiyang/Documents/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v4.jar -m -r -p --index /home/chengkaiyang/Documents/files/chr22/chr22 -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" ERR000589_1.filt.fastq ERR000589_2.filt.fastq Output_ERR000589_20251125_1
+
+
+
+
+# index 是hdfs 吗？似乎运行挺长时间的？？？ 
+chengkaiyang@buna:~$ /opt/spark-3/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 1 --verbose --num-executors 1 /home/chengkaiyang/Documents/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v6.jar  -m -r -p --index /user/chengkaiyang/index_file/chr22.fa -n 32 -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" ERR000589_1.filt.fastq ERR000589_2.filt.fastq Output_ERR000589_20251126_2046
+
+/opt/spark-3/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 1 --verbose --num-executors 1 /home/chengkaiyang/Documents/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v6.jar  -m -r -p --index /home/chengkaiyang/Documents/files/chr22/chr22.fa -n 1 -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" ERR000589_1.filt.fastq ERR000589_2.filt.fastq Output_ERR000589_20251126_2120
+
+/opt/spark-3/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 1 --verbose --num-executors 1 /home/chengkaiyang/Documents/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v6.jar  -m -r -p --index /user/chengkaiyang/index_file/chr22.fa -n 32 -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" ERR000589_1.filt.fastq ERR000589_2.filt.fastq Output_ERR000589_20251202_1053
+
+
+
+/opt/spark-3/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode cluster --executor-cores 1 --verbose --num-executors 1 /home/chengkaiyang/Documents/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v6.jar  -m -r -p --index /user/chengkaiyang/index_file/chr22.fa -n 32 -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" ERR000589_1.filt.fastq ERR000589_2.filt.fastq Output_ERR000589_20251203_0828

@@ -414,10 +414,10 @@ public class Bwa implements Serializable {
 		int returnCode = BwaJni.Bwa_Jni(parametersArray);
 
 		if (returnCode != 0) {
-			System.out.println("["+this.getClass().getName()+"] :: BWA exited with error code: " + String.valueOf(returnCode));
+			LOG.info("["+this.getClass().getName()+"] :: BWA exited with error code: " + String.valueOf(returnCode));
 			return returnCode;
 		}
-        System.out.println("["+this.getClass().getName()+"] :: BWA exited with success");
+        LOG.info("["+this.getClass().getName()+"] :: BWA exited with success");
 		// The run was successful
 		return 0;
 	}
