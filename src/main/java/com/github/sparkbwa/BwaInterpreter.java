@@ -181,7 +181,7 @@ public class BwaInterpreter {
 		else if ((options.getPartitionNumber() != 0) && (options.isSortFastqReads())) {
 			singleReadsKeyVal = singleReadsKeyVal.repartition(options.getPartitionNumber());
 			readsRDD = singleReadsKeyVal.sortByKey().values();
-            readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_184");
+//            readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_184");
             LOG.info("["+this.getClass().getName()+"] :: Repartition with sort");
 		}
 
@@ -211,7 +211,7 @@ public class BwaInterpreter {
 			readsRDD = singleReadsKeyVal
 				.repartition(options.getPartitionNumber())
 				.values();
-            readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_214");
+//            readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_214");
 
 		}
 
@@ -219,7 +219,7 @@ public class BwaInterpreter {
 		LOG.info("["+this.getClass().getName()+"] :: End of sorting. Timing: " + endTime);
 		LOG.info("["+this.getClass().getName()+"] :: Total time: " + (endTime - startTime) / 1e9 / 60.0 + " minutes");
 
-        readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_222");
+//        readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_222");
 
 		return readsRDD;
 	}
@@ -253,7 +253,7 @@ public class BwaInterpreter {
 		else if ((options.getPartitionNumber() != 0) && (options.isSortFastqReads())) {
 			pairedReadsRDD = pairedReadsRDD.repartition(options.getPartitionNumber());
 			readsRDD = pairedReadsRDD.sortByKey().values();
-            readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_256");
+//            readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_256");
 			LOG.info("["+this.getClass().getName()+"] :: Repartition with sort");
 		}
 
@@ -282,14 +282,14 @@ public class BwaInterpreter {
 			readsRDD = pairedReadsRDD
 				.repartition(options.getPartitionNumber())
 				.values() ;
-            readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_285");
+//            readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_285");
 		}
 
 		long endTime = System.nanoTime();
 
 		LOG.info("["+this.getClass().getName()+"] :: End of sorting. Timing: " + endTime);
 		LOG.info("["+this.getClass().getName()+"] :: Total time: " + (endTime - startTime) / 1e9 / 60.0 + " minutes");
-        readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_292");
+//        readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_292");
 
 		return readsRDD;
 	}
@@ -339,7 +339,7 @@ public class BwaInterpreter {
             returnedValuesRdd = MapSingleBwa(bwa, readsRDD);
 
 		}
-        returnedValuesRdd.repartition(1).saveAsTextFile(this.options.getOutputPath()+"line_342");
+//        returnedValuesRdd.repartition(1).saveAsTextFile(this.options.getOutputPath()+"line_342");
         List<String> returnedValues = returnedValuesRdd.collect();
 
         // In the case of use a reducer the final output has to be stored in just one file
