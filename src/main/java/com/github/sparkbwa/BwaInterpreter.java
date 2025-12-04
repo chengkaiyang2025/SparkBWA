@@ -360,10 +360,10 @@ public class BwaInterpreter {
                     LOG.info("JMAbuin:: Line ::" + line);
 					while (line != null) {
 
-//						if (i == 0 || !line.startsWith("@")) {
-							//outputFinalStream.writeBytes(line+"\n");
+						if (i == 0 || !line.startsWith("@")) {
+//							outputFinalStream.writeBytes(line+"\n");
 							outputFinalStream.write((line + "\n").getBytes());
-//						}
+						}
 
 						line = br.readLine();
 					}
