@@ -24,6 +24,10 @@ spark_start=$(date +%s)
   --class com.github.sparkbwa.SparkBWA \
   --master yarn \
   --deploy-mode cluster \
+  --conf spark.yarn.maxAppAttempts=1 \
+  --conf spark.task.maxFailures=1 \
+  --conf spark.stage.maxConsecutiveAttempts=1 \
+  --conf spark.speculation=false \
   --executor-cores 4 \
   --num-executors 8 \
   --verbose \
