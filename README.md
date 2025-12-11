@@ -226,7 +226,7 @@ v8
 /opt/spark-3/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 1 --verbose --num-executors 1 /home/chengkaiyang/Documents/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v8.jar  -m -r -p --index /home/chengkaiyang/Documents/files/chr22/chr22.fa  -n 32 -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" ERR000589_1.filt.fastq ERR000589_2.filt.fastq Output_ERR000589_20251203_1004
 
 v8 with hadoop
-/opt/spark-3/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 1 --verbose --num-executors 1 /home/hadoop/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v8.jar  -m -r -p --index /home/hadoop/bwa_input_files/chr22.fa  -n 32 -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" /user/hadoop/ERR000589_1.filt.fastq /user/hadoop/ERR000589_2.filt.fastq Output_ERR000589_20251203_1224
+/opt/spark-3/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode client --executor-cores 2 --verbose --num-executors 3 /home/hadoop/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v8.jar  -m -r -p --index /home/hadoop/bwa_input_files/chr22.fa  -n 4 -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" /user/hadoop/ERR000589_1.filt.fastq /user/hadoop/ERR000589_2.filt.fastq Output_ERR000589_20251203_1224
 
 BWA 会调用
 25/12/03 09:55:24 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: -m
@@ -241,3 +241,16 @@ BWA 会调用
 25/12/03 09:55:24 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: ERR000589_1.filt.fastq
 25/12/03 09:55:24 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: ERR000589_2.filt.fastq
 25/12/03 09:55:24 INFO BwaOptions: [com.github.sparkbwa.BwaOptions] :: Received argument: Output_ERR000589_20251203_0955
+
+final coomend:
+need set -t
+/opt/spark-3/bin/spark-submit --class com.github.sparkbwa.SparkBWA --master yarn --deploy-mode cluster --executor-cores 4 --verbose --num-executors 8 /home/hadoop/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v10.jar  -t /home/hadoop/spark_bwa_tmp -m -r -p --index /home/hadoop/bwa_input_files/chr22.fa  -n 8 -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" /user/hadoop/ERR000589_1.filt.fastq /user/hadoop/ERR000589_2.filt.fastq Output_ERR000589_20251211_1429
+
+
+
+/home/hadoop/bwa-0.7.19/bwa mem \
+-R "@RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
+/home/hadoop/bwa_input_files/chr22.fa \
+/home/hadoop/bwa_input_files/ERR000589_1.filt.fastq \
+/home/hadoop/bwa_input_files/ERR000589_2.filt.fastq \
+> output.sam
