@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Exit if any command fails
-set -e
+set -e -x
 
 # Timestamp for output directories
 timestamp=$(date +%Y%m%d_%H%M%S)
@@ -24,19 +24,18 @@ spark_start=$(date +%s)
   --class com.github.sparkbwa.SparkBWA \
   --master yarn \
   --deploy-mode cluster \
-  --conf spark.yarn.maxAppAttempts=1 \
-  --conf spark.task.maxFailures=1 \
-  --conf spark.stage.maxConsecutiveAttempts=1 \
-  --conf spark.speculation=false \
-  --executor-cores 4 \
+  --conf spark.yarn.maxAppAttempts=3 \
+  --conf spark.task.maxFailures=3 \
+  --conf spark.stage.maxConsecutiveAttempts=3 \
+  --executor-cores 2 \
   --num-executors 8 \
   --verbose \
   /home/hadoop/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v10.jar \
   -t /home/hadoop/spark_bwa_tmp \
   -m -r -p \
   --index /home/hadoop/bwa_input_files/chr22.fa \
-  -n 8 \
-  -w "-R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
+  -n 4 \
+  -w "-v 3 -t 8 -R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
   /user/hadoop/ERR000589_1.filt.fastq \
   /user/hadoop/ERR000589_2.filt.fastq \
   Output_ERR000589_${timestamp} | tee -a "$LOG"
