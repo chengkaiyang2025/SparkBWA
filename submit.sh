@@ -34,7 +34,7 @@ spark_start=$(date +%s)
   -t /home/hadoop/spark_bwa_tmp \
   -m -r -p \
   --index /home/hadoop/bwa_input_files/chr22.fa \
-  -n 8 \
+  -n 4 \
   -w "-v 3 -t 8 -R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
   /user/hadoop/ERR000589_1.filt.fastq \
   /user/hadoop/ERR000589_2.filt.fastq \
