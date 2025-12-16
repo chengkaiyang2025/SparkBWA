@@ -254,3 +254,8 @@ need set -t
 /home/hadoop/bwa_input_files/ERR000589_1.filt.fastq \
 /home/hadoop/bwa_input_files/ERR000589_2.filt.fastq \
 > output.sam
+
+----
+cd /home/hadoop/SparkBWA
+nohup ./submit_hg38.sh > submit_hg38.nohup.out 2>&1 &
+nohup ./submit_chr22.sh > submit_chr22.nohup.out 2>&1 &
