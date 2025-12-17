@@ -35,7 +35,7 @@ spark_start=$(date +%s)
   -m -r -p \
   --index /home/hadoop/bwa_input_files_hg38/hg38.fa \
   -n 6 \
-  -w "-v 3 -t 8 -R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
+  -w "-t 2 -R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
   /user/hadoop/ERR000589_1.filt.fastq \
   /user/hadoop/ERR000589_2.filt.fastq \
   Output_ERR000589_hg38_${timestamp} | tee -a "$LOG"
@@ -55,7 +55,7 @@ echo | tee -a "$LOG"
 echo "[2/2] Running BWA MEM locally..." | tee -a "$LOG"
 bwa_start=$(date +%s)
 
-/home/hadoop/bwa-0.7.19/bwa mem -v 3 -t 8 \
+/home/hadoop/bwa-0.7.19/bwa mem -v 3 -t 2 \
   -R "@RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
   /home/hadoop/bwa_input_files_hg38/hg38.fa \
   /home/hadoop/bwa_input_files/ERR000589_1.filt.fastq \
