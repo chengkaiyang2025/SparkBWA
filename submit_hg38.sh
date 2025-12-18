@@ -28,7 +28,7 @@ spark_start=$(date +%s)
   --conf spark.task.maxFailures=3 \
   --conf spark.stage.maxConsecutiveAttempts=3 \
   --executor-cores 4 \
-  --executor-memory 3G \
+  --executor-memory 2G \
   --conf spark.executor.memoryOverhead=8g \
   --num-executors 1 \
   --verbose \
@@ -37,7 +37,7 @@ spark_start=$(date +%s)
   -m -r -p \
   --index /home/hadoop/bwa_input_files_hg38/hg38.fa \
   -n 1 \
-  -w "-t 1 -R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
+  -w "-t 8 -R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
   /user/hadoop/ERR000589_1.filt.fastq \
   /user/hadoop/ERR000589_2.filt.fastq \
   Output_ERR000589_hg38_${timestamp} | tee -a "$LOG"
@@ -49,36 +49,35 @@ echo | tee -a "$LOG"
 echo "SparkBWA finished at: $(date)" | tee -a "$LOG"
 echo "SparkBWA runtime: ${spark_elapsed} seconds (~$((spark_elapsed/60)) minutes)" | tee -a "$LOG"
 echo | tee -a "$LOG"
-
-########################################
-# 2. Run single-node BWA MEM
-########################################
-
-echo "[2/2] Running BWA MEM locally..." | tee -a "$LOG"
-bwa_start=$(date +%s)
-
-/home/hadoop/bwa-0.7.19/bwa mem -v 3 -t 1 \
-  -R "@RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
-  /home/hadoop/bwa_input_files_hg38/hg38.fa \
-  /home/hadoop/bwa_input_files/ERR000589_1.filt.fastq \
-  /home/hadoop/bwa_input_files/ERR000589_2.filt.fastq \
-  > ~/bwa_input_files_copy/hg_38_output_${timestamp}.sam
-
-bwa_end=$(date +%s)
-bwa_elapsed=$((bwa_end - bwa_start))
-
-echo | tee -a "$LOG"
-echo "BWA MEM finished at: $(date)" | tee -a "$LOG"
-echo "BWA MEM runtime: ${bwa_elapsed} seconds (~$((bwa_elapsed/60)) minutes)" | tee -a "$LOG"
-
-########################################
-# 3. Summary
-########################################
-
-echo | tee -a "$LOG"
-echo "===== Benchmark Summary on HG38 =====" | tee -a "$LOG"
-echo "SparkBWA: ${spark_elapsed} seconds (~$((spark_elapsed/60)) minutes)" | tee -a "$LOG"
-echo "BWA MEM : ${bwa_elapsed} seconds (~$((bwa_elapsed/60)) minutes)" | tee -a "$LOG"
-echo "Full log saved to: $LOG" | tee -a "$LOG"
-
-upsize the memory of executor, set n = 3, set number of executor 3
+# Uncomment,just for test.
+#########################################
+## 2. Run single-node BWA MEM
+#########################################
+#
+#echo "[2/2] Running BWA MEM locally..." | tee -a "$LOG"
+#bwa_start=$(date +%s)
+#
+#/home/hadoop/bwa-0.7.19/bwa mem -v 3 -t 1 \
+#  -R "@RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
+#  /home/hadoop/bwa_input_files_hg38/hg38.fa \
+#  /home/hadoop/bwa_input_files/ERR000589_1.filt.fastq \
+#  /home/hadoop/bwa_input_files/ERR000589_2.filt.fastq \
+#  > ~/bwa_input_files_copy/hg_38_output_${timestamp}.sam
+#
+#bwa_end=$(date +%s)
+#bwa_elapsed=$((bwa_end - bwa_start))
+#
+#echo | tee -a "$LOG"
+#echo "BWA MEM finished at: $(date)" | tee -a "$LOG"
+#echo "BWA MEM runtime: ${bwa_elapsed} seconds (~$((bwa_elapsed/60)) minutes)" | tee -a "$LOG"
+#
+#########################################
+## 3. Summary
+#########################################
+#
+#echo | tee -a "$LOG"
+#echo "===== Benchmark Summary on HG38 =====" | tee -a "$LOG"
+#echo "SparkBWA: ${spark_elapsed} seconds (~$((spark_elapsed/60)) minutes)" | tee -a "$LOG"
+#echo "BWA MEM : ${bwa_elapsed} seconds (~$((bwa_elapsed/60)) minutes)" | tee -a "$LOG"
+#echo "Full log saved to: $LOG" | tee -a "$LOG"
+#
