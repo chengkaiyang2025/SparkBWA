@@ -27,8 +27,9 @@ spark_start=$(date +%s)
   --conf spark.yarn.maxAppAttempts=3 \
   --conf spark.task.maxFailures=3 \
   --conf spark.stage.maxConsecutiveAttempts=3 \
-  --executor-cores 2 \
-  --num-executors 3 \
+  --executor-cores 4 \
+  --conf spark.executor.memoryOverhead=6g \
+  --num-executors 6 \
   --verbose \
   /home/hadoop/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v10.jar \
   -t /home/hadoop/spark_bwa_tmp \
@@ -78,3 +79,5 @@ echo "===== Benchmark Summary on HG38 =====" | tee -a "$LOG"
 echo "SparkBWA: ${spark_elapsed} seconds (~$((spark_elapsed/60)) minutes)" | tee -a "$LOG"
 echo "BWA MEM : ${bwa_elapsed} seconds (~$((bwa_elapsed/60)) minutes)" | tee -a "$LOG"
 echo "Full log saved to: $LOG" | tee -a "$LOG"
+
+upsize the memory of executor, set n = 3, set number of executor 3
