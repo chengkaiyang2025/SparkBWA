@@ -28,8 +28,8 @@ spark_start=$(date +%s)
   --conf spark.task.maxFailures=3 \
   --conf spark.stage.maxConsecutiveAttempts=3 \
   --executor-cores 4 \
-  --executor-memory 2G \
-  --conf spark.executor.memoryOverhead=4g \
+  --executor-memory 3G \
+  --conf spark.executor.memoryOverhead=8g \
   --num-executors 1 \
   --verbose \
   /home/hadoop/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v10.jar \
