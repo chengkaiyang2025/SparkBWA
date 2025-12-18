@@ -37,7 +37,7 @@ spark_start=$(date +%s)
   -m -r -p \
   --index /home/hadoop/bwa_input_files_hg38/hg38.fa \
   -n 1 \
-  -w "-t 8 -R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
+  -w "-t 1 -R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
   /user/hadoop/ERR000589_1.filt.fastq \
   /user/hadoop/ERR000589_2.filt.fastq \
   Output_ERR000589_hg38_${timestamp} | tee -a "$LOG"
