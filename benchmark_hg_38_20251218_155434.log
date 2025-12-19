@@ -1,0 +1,8 @@
+hadoop@buna:~/SparkBWA$ cat benchmark_hg_38_20251218_155434.log
+==== SparkBWA vs BWA Benchmark ====
+Start time: Thu 18 Dec 2025 03:54:34 PM PST
+
+[1/2] Running SparkBWA (spark-submit, YARN cluster mode)...
+
+SparkBWA finished at: Thu 18 Dec 2025 04:05:41 PM PST
+SparkBWA runtime: 667 seconds (~11 minutes)
