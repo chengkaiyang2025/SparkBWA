@@ -54,7 +54,7 @@ echo | tee -a "$LOG"
 ## 2. Run single-node BWA MEM
 #########################################
 #
-#echo "[2/2] Running BWA MEM locally..." | tee -a "$LOG"
+#echo "[2/2] Running BWA MEM locally..." | tee -benchmark_hg_38_20251218_155434.log "$LOG"
 #bwa_start=$(date +%s)
 #
 #/home/hadoop/bwa-0.7.19/bwa mem -v 3 -t 1 \
@@ -67,17 +67,17 @@ echo | tee -a "$LOG"
 #bwa_end=$(date +%s)
 #bwa_elapsed=$((bwa_end - bwa_start))
 #
-#echo | tee -a "$LOG"
-#echo "BWA MEM finished at: $(date)" | tee -a "$LOG"
-#echo "BWA MEM runtime: ${bwa_elapsed} seconds (~$((bwa_elapsed/60)) minutes)" | tee -a "$LOG"
+#echo | tee -benchmark_hg_38_20251218_155434.log "$LOG"
+#echo "BWA MEM finished at: $(date)" | tee -benchmark_hg_38_20251218_155434.log "$LOG"
+#echo "BWA MEM runtime: ${bwa_elapsed} seconds (~$((bwa_elapsed/60)) minutes)" | tee -benchmark_hg_38_20251218_155434.log "$LOG"
 #
 #########################################
 ## 3. Summary
 #########################################
 #
-#echo | tee -a "$LOG"
-#echo "===== Benchmark Summary on HG38 =====" | tee -a "$LOG"
-#echo "SparkBWA: ${spark_elapsed} seconds (~$((spark_elapsed/60)) minutes)" | tee -a "$LOG"
-#echo "BWA MEM : ${bwa_elapsed} seconds (~$((bwa_elapsed/60)) minutes)" | tee -a "$LOG"
-#echo "Full log saved to: $LOG" | tee -a "$LOG"
+#echo | tee -benchmark_hg_38_20251218_155434.log "$LOG"
+#echo "===== Benchmark Summary on HG38 =====" | tee -benchmark_hg_38_20251218_155434.log "$LOG"
+#echo "SparkBWA: ${spark_elapsed} seconds (~$((spark_elapsed/60)) minutes)" | tee -benchmark_hg_38_20251218_155434.log "$LOG"
+#echo "BWA MEM : ${bwa_elapsed} seconds (~$((bwa_elapsed/60)) minutes)" | tee -benchmark_hg_38_20251218_155434.log "$LOG"
+#echo "Full log saved to: $LOG" | tee -benchmark_hg_38_20251218_155434.log "$LOG"
 #
