@@ -28,15 +28,15 @@ spark_start=$(date +%s)
   --conf spark.task.maxFailures=3 \
   --conf spark.stage.maxConsecutiveAttempts=3 \
   --executor-cores 4 \
-  --executor-memory 1G \
+  --executor-memory 2G \
   --conf spark.executor.memoryOverhead=6g \
-  --num-executors 3 \
+  --num-executors 4 \
   --verbose \
   /home/hadoop/SparkBWA/SparkBWATest/compliedJarFile/SparkBWA-jdk11-spark357-v10.jar \
   -t /home/hadoop/spark_bwa_tmp \
   -m -r -p \
   --index /home/hadoop/bwa_input_files_hg38/hg38.fa \
-  -n 3 \
+  -n 4 \
   -w "-t 8 -R @RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
   /user/hadoop/ERR000589_1.filt.fastq \
   /user/hadoop/ERR000589_2.filt.fastq \

@@ -123,5 +123,9 @@ Hadoop： 3.4.2
 同时能在单台服务器上成功运行并给出结果，这是在本机的运行[结果日志](https://github.com/chengkaiyang2025/SparkBWA/blob/spark3/run_result.log)
 
 
-## 4.3 解决方案与实现细节（Solutions & Implementation）
+# 5. Experimental Setup
+## 5.1 集群环境（Cluster Configuration）
+## 5.2 硬件与网络配置
 
+## 5.3 数据集（Dataset）
+## 5.4 基准测试方法（Baseline）
