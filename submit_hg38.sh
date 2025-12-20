@@ -57,7 +57,7 @@ echo | tee -a "$LOG"
 echo "[2/2] Running BWA MEM locally..." | tee -a "$LOG"
 bwa_start=$(date +%s)
 
-/home/hadoop/bwa-0.7.19/bwa mem -v 3 -t 1 \
+/home/hadoop/bwa-0.7.19/bwa mem -v 3 -t 8 \
   -R "@RG\tID:foo\tLB:bar\tPL:illumina\tPU:illumina\tSM:ERR000589" \
   /home/hadoop/bwa_input_files_hg38/hg38.fa \
   /home/hadoop/bwa_input_files/ERR000589_1.filt.fastq \
