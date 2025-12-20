@@ -125,7 +125,19 @@ Hadoop： 3.4.2
 
 # 5. Experimental Setup
 ## 5.1 集群环境（Cluster Configuration）
-## 5.2 硬件与网络配置
+本研究的分布式实在 4 台 linux 服务器组成的小型 hadoop 集群上运行，每个节点拥有 64G 内存，其中每台服务器分配 16GB 给 yarn，但考虑到实验室的条件，服务器并不是总能够稳定运行，有一台服务器 pivla
+有时因为各种问题无法连接。因此我们的大多数实验运行在 3 台服务器上，一共有 48GB 的运行内存可以用来 SparkBWA。
 
-## 5.3 数据集（Dataset）
-## 5.4 基准测试方法（Baseline）
+## 5.2 数据集（Dataset）
+我们先后基于 chr22 和 hg38 创建索引文件，序列文件分别使用 ERR000589_1.filt.fastq 和 ERR000589_1.filt.fastq。
+
+基于 hg38 创建的索引文件总大小在 5.2 GB 左右，两个序列文件在 1.7GB 左右。
+
+值得注意是当 spark executor 运行时候会调用 bwa 将全部索引文件读入内存中，这意味着在运行 SparkBWA 时候我们需要给每个 yarn container 留出至少 6GB 的堆外内存以便正常运行 bwa，同时还要至少留出 2GB 给 spark executor
+因此每个 container 至少要给 8GB 的内存运行。
+
+这意味着每台16GB服务器最多分配到 2 个container。因此受到硬件资源影响，我们每次实验只会启动小于 6 个 yarn container 进行实验。
+
+## 5.3 基准测试方法（Baseline）
+
+我们的
