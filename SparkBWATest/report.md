@@ -105,9 +105,23 @@ Hadoop 版本中，验证 SparkBWA 在最新的分布式环境下能否正常运
 ## 4.2 升级过程中面临的挑战
 
 在本次研究中，升级 Spark 版本的挑战主要在兼容性，包括 SparkBWA 中使用的一些 Spark API需要升级，JNI 与 原生库加载问题。
-为了不污染服务器上的各类环境配置，我们决定使用 docker 来在本地服务器搭建全套的 hadoop 与 Spark 环境，如果在本地的 docker 中 SparkBWA 中能够正常运行，我们在考虑
+为了不污染服务器上的各类环境配置，我们决定使用 docker 来在本地服务器搭建全套的 hadoop 与 Spark 环境，如果在本地的 docker 中 SparkBWA 中能够正常运行，我们在考虑在服务器上搭建指定版本的 hadoop，jdk 进行实验。
 
-最终我们选择如下配置
+我们首先使用 [Dockerfile](https://github.com/chengkaiyang2025/SparkBWA/blob/c03247c893fa7615d857fc42d3ff172209c6f230/SparkBWATest/spark3x_package_jar/Dockerfile) 来构建编译 jar 包的环境，这部分包括指定 scala，spark，jdk 版本。
+当 jar 包编译成功后，特别需要注意检查 jar 包中是否已经包含编译好 bwa。
+
+然后我们在本地笔记本搭建全套的 hadoop，spark 环境来验证 jar 包是否能正常运行，我们使用 [docker-compose.yml](https://github.com/chengkaiyang2025/SparkBWA/blob/1ec694e8cbb2d14cdffce03a33cce9e23339a595/SparkBWATest/spark3x_env_setup_compose/docker-compose.yml) 来构建。
+
+在反复修改尝试后，我们成功地将SparkBWA 升级到了以下版本
+```bash
+Spark：3.3.2
+bwa: 0.7.19
+jdk: 11
+Hadoop： 3.4.2
+```
+
+同时能在单台服务器上成功运行并给出结果，这是在本机的运行[结果日志](https://github.com/chengkaiyang2025/SparkBWA/blob/spark3/run_result.log)
+
 
 ## 4.3 解决方案与实现细节（Solutions & Implementation）
 
