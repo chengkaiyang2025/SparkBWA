@@ -257,5 +257,5 @@ need set -t
 
 ----
 cd /home/hadoop/SparkBWA
-nohup ./submit_hg38.sh > submit_hg38.nohup.out 2>&1 &
-nohup ./submit_chr22.sh > submit_chr22.nohup.out 2>&1 &
+nohup bash submit_hg38.sh > submit_hg38.nohup.out 2>&1 &
+nohup bash submit_chr22.sh > submit_chr22.nohup.out 2>&1 &
