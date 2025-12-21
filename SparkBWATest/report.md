@@ -197,5 +197,22 @@ SparkBWA 的思想主要是将序列文件进行切割，然后在多台服务�
 
 # 9.Reproducibility
 
-Github 代码见
 
+The source code corresponding to this report is publicly available on GitHub:
+•	GitHub Repository:
+https://github.com/chengkaiyang2025/SparkBWA/tree/spark3
+
+All experiments reported in this study were conducted based on the code and scripts provided in the repository.
+
+Environment Dependencies
+
+The experimental environment required to reproduce the results is summarized as follows:
+•	Operating System: Linux
+•	Java: JDK 11
+•	Apache Spark: 3.5.7
+•	Hadoop / YARN: 3.3
+•	BWA: 0.7.19
+•	Reference Genome: hg38
+
+# Role of AI in This Study
+AI was mainly used for writing Docker-related configuration files and for polishing the English writing of this report.
