@@ -195,5 +195,7 @@ SparkBWA 的思想主要是将序列文件进行切割，然后在多台服务�
 
 在未来工作中，SparkBWA 的优化点可以主要放在资源分配管理上。具体来说，可以考虑使用更轻量型、灵活性更高的资源管理工具 Kubernetes 来替换 yarn，使用 S3 来替换 hdfs，进一步节省服务器的资源。
 
+# 9.Reproducibility
 
+Github 代码见
 
