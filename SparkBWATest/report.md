@@ -173,7 +173,27 @@ bwa 的 3 倍以上。
 同时我们只是简单以程序运行时间作为唯一指标，没有考虑 SparkBWA 运行时候，内存 和 cpu 的开销，也没有去考虑 Spark Yarn 本身占用也更多内存等问题。
 
 
+# 7. Discussion & Insights
 
+## 7.1 SparkBWA 本身存在的缺陷
+
+虽然 SparkBWA 确实一定程度能提高 bwa 的运行速度，但其实 SparkBWA 本身需要安装 Hadoop，Yarn hdfs 这些服务所占用的内存太多，而且 SparkBWA 还需要额外进行一些配置，易用性不是很高。
+如果只是为了提高 bwa 的提升速度，那么需要考虑是否要给 Yarn hadoop 预留出如此多的资源，因为当我们不运行 SparkBWA 时候这些资源依旧被占用。
+
+## 7.2 更多 Insights
+
+SparkBWA 的思想主要是将序列文件进行切割，然后在多台服务器上分布式地与索引文件进行对比。但主要问题是 Hadoop 本身占用了较多资源，尤其是 yarn。
+我们可以去掉 Hadoop，使用 Kubernetes 来对 Spark 进行资源管理，这样 Spark 的 driver 和 executor 都可以 pod 的形式运行。这样我们只有在用 SparkBWA
+时候，才会向 Kubernetes 申请资源。而不是用 SparkBWA 时候， Kubernetes 可以为服务器上其他程序分配资源。
+
+而相较于 hadoop 的 hdfs，目前另一个主流的文件存储方式使用对象存储，例如基于 S3 协议的对象存储 Minio 或直接使用云厂商的对象存储云服务。
+
+# 8. Conclusion & Future Work
+
+在本次研究中，我们主要升级了 SparkBWA 的版本，然后使用 docker 先在本地搭建 hadoop 环境，验证 SparkBWA 可以运行，然后使用一个小型的 Hadoop 集群来测试相对于 bwa ，SparkBWA 的性能提升程度。
+最后我们得到结论是 SparkBWA 确实能接住 并行计算的能力提高 BWA 的运行效率，但在真实使用过程中，存在运行参数不容易优化，所依赖的 Hadoop 太过重型，本身需要占用服务器一定资源等问题。
+
+在未来工作中，SparkBWA 的优化点可以主要放在资源分配管理上。具体来说，可以考虑使用更轻量型、灵活性更高的资源管理工具 Kubernetes 来替换 yarn，使用 S3 来替换 hdfs，进一步节省服务器的资源。
 
 
 
