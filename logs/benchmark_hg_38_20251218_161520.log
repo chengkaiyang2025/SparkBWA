@@ -1,0 +1,7 @@
+==== SparkBWA vs BWA Benchmark ====
+Start time: Thu 18 Dec 2025 04:15:20 PM PST
+
+[1/2] Running SparkBWA (spark-submit, YARN cluster mode)...
+
+SparkBWA finished at: Thu 18 Dec 2025 04:23:26 PM PST
+SparkBWA runtime: 486 seconds (~8 minutes)

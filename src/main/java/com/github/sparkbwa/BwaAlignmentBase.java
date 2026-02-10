@@ -81,7 +81,7 @@ public abstract class BwaAlignmentBase implements Serializable {
 		}
 
 
-		this.LOG.info("["+this.getClass().getName()+"] :: " + this.appId + " - " + this.appName);
+		LOG.info("["+this.getClass().getName()+"] :: " + this.appId + " - " + this.appName);
 	}
 
 	/**
@@ -104,7 +104,7 @@ public abstract class BwaAlignmentBase implements Serializable {
 		else{
 			this.bwaInterpreter.setOutputFile(this.tmpDir + "/" +outputSamFileName);
 		}
-
+        LOG.info("Output tmp dir: "+this.bwaInterpreter.getOutputFile());
 
 		//We run BWA with the corresponding options set
 		this.bwaInterpreter.run(0);
@@ -139,7 +139,7 @@ public abstract class BwaAlignmentBase implements Serializable {
 		ArrayList<String> returnedValues = new ArrayList<String>();
 		String outputDir = this.bwaInterpreter.getOutputHdfsDir();
 
-		this.LOG.info("["+this.getClass().getName()+"] :: " + this.appId + " - " + this.appName + " Copying files...");
+		LOG.info("["+this.getClass().getName()+"] :: " + this.appId + " - " + this.appName + " Copying files...");
 
 		try {
 			//if (outputDir.startsWith("hdfs")) {
@@ -156,14 +156,15 @@ public abstract class BwaAlignmentBase implements Serializable {
 			}*/
 		} catch (IOException e) {
 			e.printStackTrace();
-			this.LOG.error(e.toString());
+			LOG.info(e.toString());
 		}
 
-		// Delete the old results file
+//		 Delete the old results file
 		File tmpSamFullFile = new File(this.bwaInterpreter.getOutputFile());
-		tmpSamFullFile.delete();
-
-		returnedValues.add(outputDir + "/" + outputSamFileName);
+//		tmpSamFullFile.delete();
+        LOG.info("ABS path of BWA result:"+tmpSamFullFile.getAbsoluteFile());
+        LOG.info("ABS path of BWA result:"+tmpSamFullFile.getAbsoluteFile());
+        returnedValues.add(outputDir + "/" + outputSamFileName);
 
 		return returnedValues;
 	}

@@ -180,8 +180,9 @@ public class BwaInterpreter {
 		// Sort in memory with partitioning
 		else if ((options.getPartitionNumber() != 0) && (options.isSortFastqReads())) {
 			singleReadsKeyVal = singleReadsKeyVal.repartition(options.getPartitionNumber());
-			readsRDD = singleReadsKeyVal.sortByKey().values();//.persist(StorageLevel.MEMORY_ONLY());
-			LOG.info("["+this.getClass().getName()+"] :: Repartition with sort");
+			readsRDD = singleReadsKeyVal.sortByKey().values();
+//            readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_184");
+            LOG.info("["+this.getClass().getName()+"] :: Repartition with sort");
 		}
 
 		// No Sort with no partitioning
@@ -210,7 +211,7 @@ public class BwaInterpreter {
 			readsRDD = singleReadsKeyVal
 				.repartition(options.getPartitionNumber())
 				.values();
-				//.persist(StorageLevel.MEMORY_ONLY());
+//            readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_214");
 
 		}
 
@@ -218,7 +219,7 @@ public class BwaInterpreter {
 		LOG.info("["+this.getClass().getName()+"] :: End of sorting. Timing: " + endTime);
 		LOG.info("["+this.getClass().getName()+"] :: Total time: " + (endTime - startTime) / 1e9 / 60.0 + " minutes");
 
-		//readsRDD.persist(StorageLevel.MEMORY_ONLY());
+//        readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_222");
 
 		return readsRDD;
 	}
@@ -251,7 +252,8 @@ public class BwaInterpreter {
 		// Sort in memory with partitioning
 		else if ((options.getPartitionNumber() != 0) && (options.isSortFastqReads())) {
 			pairedReadsRDD = pairedReadsRDD.repartition(options.getPartitionNumber());
-			readsRDD = pairedReadsRDD.sortByKey().values();//.persist(StorageLevel.MEMORY_ONLY());
+			readsRDD = pairedReadsRDD.sortByKey().values();
+//            readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_256");
 			LOG.info("["+this.getClass().getName()+"] :: Repartition with sort");
 		}
 
@@ -279,15 +281,15 @@ public class BwaInterpreter {
 
 			readsRDD = pairedReadsRDD
 				.repartition(options.getPartitionNumber())
-				.values();
-				//.persist(StorageLevel.MEMORY_ONLY());
+				.values() ;
+//            readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_285");
 		}
 
 		long endTime = System.nanoTime();
 
 		LOG.info("["+this.getClass().getName()+"] :: End of sorting. Timing: " + endTime);
 		LOG.info("["+this.getClass().getName()+"] :: Total time: " + (endTime - startTime) / 1e9 / 60.0 + " minutes");
-		//readsRDD.persist(StorageLevel.MEMORY_ONLY());
+//        readsRDD.repartition(1).saveAsTextFile(options.getOutputPath()+"line_292");
 
 		return readsRDD;
 	}
@@ -298,11 +300,11 @@ public class BwaInterpreter {
 	 * @param readsRDD The RDD containing the paired reads
 	 * @return A list of strings containing the resulting sam files where the output alignments are stored
 	 */
-	private List<String> MapPairedBwa(Bwa bwa, JavaRDD<Tuple2<String, String>> readsRDD) {
+	private JavaRDD<String> MapPairedBwa(Bwa bwa, JavaRDD<Tuple2<String, String>> readsRDD) {
 		// The mapPartitionsWithIndex is used over this RDD to perform the alignment. The resulting sam filenames are returned
-		return readsRDD
-			.mapPartitionsWithIndex(new BwaPairedAlignment(readsRDD.context(), bwa), true)
-			.collect();
+        JavaRDD<String> stringJavaRDD = readsRDD
+                .mapPartitionsWithIndex(new BwaPairedAlignment(readsRDD.context(), bwa), true);
+        return stringJavaRDD;
 	}
 
 	/**
@@ -311,11 +313,10 @@ public class BwaInterpreter {
 	 * @param readsRDD The RDD containing the paired reads
 	 * @return A list of strings containing the resulting sam files where the output alignments are stored
 	 */
-	private List<String> MapSingleBwa(Bwa bwa, JavaRDD<String> readsRDD) {
+	private JavaRDD<String>  MapSingleBwa(Bwa bwa, JavaRDD<String> readsRDD) {
 		// The mapPartitionsWithIndex is used over this RDD to perform the alignment. The resulting sam filenames are returned
 		return readsRDD
-			.mapPartitionsWithIndex(new BwaSingleAlignment(readsRDD.context(), bwa), true)
-			.collect();
+			.mapPartitionsWithIndex(new BwaSingleAlignment(readsRDD.context(), bwa), true);
 	}
 
   /**
@@ -328,17 +329,20 @@ public class BwaInterpreter {
 		LOG.info("["+this.getClass().getName()+"] :: Starting BWA");
 		Bwa bwa = new Bwa(this.options);
 
-		List<String> returnedValues;
+        JavaRDD<String> returnedValuesRdd;
 		if (bwa.isPairedReads()) {
 			JavaRDD<Tuple2<String, String>> readsRDD = handlePairedReadsSorting();
-			returnedValues = MapPairedBwa(bwa, readsRDD);
+            returnedValuesRdd = MapPairedBwa(bwa, readsRDD);
 		}
 		else {
 			JavaRDD<String> readsRDD = handleSingleReadsSorting();
-			returnedValues = MapSingleBwa(bwa, readsRDD);
-		}
+            returnedValuesRdd = MapSingleBwa(bwa, readsRDD);
 
-		// In the case of use a reducer the final output has to be stored in just one file
+		}
+//        returnedValuesRdd.repartition(1).saveAsTextFile(this.options.getOutputPath()+"line_342");
+        List<String> returnedValues = returnedValuesRdd.collect();
+
+        // In the case of use a reducer the final output has to be stored in just one file
 		if(this.options.getUseReducer()) {
 			try {
 				FileSystem fs = FileSystem.get(this.conf);
@@ -353,22 +357,24 @@ public class BwaInterpreter {
 
 					String line;
 					line = br.readLine();
-
+                    LOG.info("JMAbuin:: Line ::" + line);
 					while (line != null) {
+
 						if (i == 0 || !line.startsWith("@")) {
-							//outputFinalStream.writeBytes(line+"\n");
+//							outputFinalStream.writeBytes(line+"\n");
 							outputFinalStream.write((line + "\n").getBytes());
 						}
 
 						line = br.readLine();
 					}
 					br.close();
-
-					fs.delete(new Path(returnedValues.get(i)), true);
+                    LOG.info("Path :" + (new Path(returnedValues.get(i)).toString()));
+//					fs.delete(new Path(returnedValues.get(i)), true);
 				}
 
 				outputFinalStream.close();
 				fs.close();
+                LOG.info("Write successful. ");
 			} catch (IOException e) {
 				e.printStackTrace();
 				LOG.error(e.toString());
@@ -434,7 +440,8 @@ public class BwaInterpreter {
 
 			this.sparkConf = this.ctx.getConf();
 		}
-
+        // TODO set up here
+//        this.ctx.setLocalProperty("spark.local.dir","/home/chengkaiyang/Documents/SparkBWATmpDir");
 		//The Hadoop configuration is obtained
 		this.conf = this.ctx.hadoopConfiguration();
 
